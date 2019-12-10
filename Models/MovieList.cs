@@ -11,6 +11,7 @@ namespace movie_project.Models
         [Required]
         public int MovieListId { get; set; }
 
+        [Required]
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserRefId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

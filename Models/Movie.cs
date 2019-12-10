@@ -15,6 +15,7 @@ namespace movie_project.Models
         [Column(TypeName = "varchar(255)")]
         public string Name { get; set; }
 
+        [Required]
         [ForeignKey("MovieList")]
         public int MovieListRefId { get; set; }
         public MovieList MovieList { get; set; }
