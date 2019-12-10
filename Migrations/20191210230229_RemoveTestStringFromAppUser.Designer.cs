@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using movie_project.Data;
 
 namespace movie_project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191210230229_RemoveTestStringFromAppUser")]
+    partial class RemoveTestStringFromAppUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -295,45 +297,6 @@ namespace movie_project.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("movie_project.Models.Movie", b =>
-                {
-                    b.Property<string>("imdbID")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("MovieListRefId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("imdbID");
-
-                    b.HasIndex("MovieListRefId");
-
-                    b.ToTable("Movie");
-                });
-
-            modelBuilder.Entity("movie_project.Models.MovieList", b =>
-                {
-                    b.Property<int>("MovieListId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserRefId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("MovieListId");
-
-                    b.HasIndex("ApplicationUserRefId");
-
-                    b.ToTable("MovieList");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -383,22 +346,6 @@ namespace movie_project.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("movie_project.Models.Movie", b =>
-                {
-                    b.HasOne("movie_project.Models.MovieList", "MovieList")
-                        .WithMany("Movies")
-                        .HasForeignKey("MovieListRefId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("movie_project.Models.MovieList", b =>
-                {
-                    b.HasOne("movie_project.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("MovieLists")
-                        .HasForeignKey("ApplicationUserRefId");
                 });
 #pragma warning restore 612, 618
         }
