@@ -16,6 +16,7 @@ using movie_project.API.Persistence.Repositories;
 using movie_project.API.Domain.Services;
 using movie_project.API.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 
 namespace movie_project
 {
@@ -36,11 +37,6 @@ namespace movie_project
                 options.UseMySql(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IMovieListRepository, MovieListRepository>();
-            services.AddScoped<IMovieListService, MovieListService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddAutoMapper(typeof(Startup));
-
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -52,6 +48,13 @@ namespace movie_project
                 .AddIdentityServerJwt();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<IMovieListRepository, MovieListRepository>();
+            services.AddScoped<IMovieListService, MovieListService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddAutoMapper(typeof(Startup));
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

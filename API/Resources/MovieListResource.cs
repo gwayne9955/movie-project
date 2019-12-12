@@ -7,5 +7,6 @@ namespace movie_project.API.Resources
     {
         public string MovieListId { get; set; }
         public string Name { get; set; }
+
     }
 }

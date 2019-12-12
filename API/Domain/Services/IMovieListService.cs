@@ -9,6 +9,8 @@ namespace movie_project.API.Domain.Services
     public interface IMovieListService
     {
         Task<IEnumerable<MovieList>> ListAsync();
-        Task<SaveMovieListResponse> SaveAsync(MovieList movieList);
+        Task<MovieListResponse> SaveAsync(MovieList movieList);
+        Task<MovieListResponse> UpdateAsync(int id, MovieList movieList);
+        Task<MovieListResponse> DeleteAsync(int id);
     }
 }

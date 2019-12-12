@@ -25,19 +25,63 @@ namespace movie_project.API.Services
             return await _movieListRepository.ListAsync();
         }
 
-        public async Task<SaveMovieListResponse> SaveAsync(MovieList movieList)
+        public async Task<MovieListResponse> SaveAsync(MovieList movieList)
         {
             try
             {
                 await _movieListRepository.AddAsync(movieList);
                 await _unitOfWork.CompleteAsync();
 
-                return new SaveMovieListResponse(movieList);
+                return new MovieListResponse(movieList);
             }
             catch (Exception ex)
             {
                 // Do some logging stuff
-                return new SaveMovieListResponse($"An error occurred when saving the category: {ex.Message}");
+                return new MovieListResponse($"An error occurred when saving the move list: {ex.Message}");
+            }
+        }
+
+        public async Task<MovieListResponse> UpdateAsync(int id, MovieList movieList)
+        {
+            var existingMovieList = await _movieListRepository.FindByIdAsync(id);
+
+            if (existingMovieList == null)
+                return new MovieListResponse("MovieList not found.");
+
+            existingMovieList.Name = movieList.Name;
+
+            try
+            {
+                _movieListRepository.Update(existingMovieList);
+                await _unitOfWork.CompleteAsync();
+
+                return new MovieListResponse(existingMovieList);
+            }
+            catch (Exception ex)
+            {
+                // Do some logging stuff
+                return new MovieListResponse($"An error occurred when updating the movie list: {ex.Message}");
+            }
+        }
+
+        public async Task<MovieListResponse> DeleteAsync(int id)
+        {
+            var existingMovieList = await _movieListRepository.FindByIdAsync(id);
+
+            if (existingMovieList == null)
+                return new MovieListResponse("MovieList not found.");
+
+            try
+            {
+                _movieListRepository.Remove(existingMovieList);
+                await _unitOfWork.CompleteAsync();
+
+                return new MovieListResponse(existingMovieList);
+            }
+            catch (Exception ex)
+            {
+                // Do some logging stuff
+                return new MovieListResponse($"An error occurred when deleting the movie list: {ex.Message}");
             }
         }
     }

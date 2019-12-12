@@ -23,5 +23,20 @@ namespace movie_project.API.Persistence.Repositories
         {
             await _context.MovieLists.AddAsync(movieList);
         }
+
+        public async Task<MovieList> FindByIdAsync(int id)
+        {
+            return await _context.MovieLists.FindAsync(id);
+        }
+
+        public void Update(MovieList movieList)
+        {
+            _context.MovieLists.Update(movieList);
+        }
+
+        public void Remove(MovieList movieList)
+        {
+            _context.MovieLists.Remove(movieList);
+        }
     }
 }

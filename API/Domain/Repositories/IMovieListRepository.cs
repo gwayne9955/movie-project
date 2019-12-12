@@ -9,5 +9,8 @@ namespace movie_project.API.Domain.Repositories
     {
         Task<IEnumerable<MovieList>> ListAsync();
         Task AddAsync(MovieList movieList);
+        Task<MovieList> FindByIdAsync(int id);
+        void Update(MovieList movieList);
+        void Remove(MovieList movieList);
     }
 }
