@@ -8,5 +8,6 @@ namespace movie_project.API.Domain.Repositories
     public interface IMovieListRepository
     {
         Task<IEnumerable<MovieList>> ListAsync();
+        Task AddAsync(MovieList movieList);
     }
 }

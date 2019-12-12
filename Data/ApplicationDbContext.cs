@@ -20,5 +20,7 @@ namespace movie_project.Data
         }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<MovieList> MovieLists { get; set; }
+        public DbSet<Movie> Movies { get; set; }
     }
 }

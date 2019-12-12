@@ -25,12 +25,15 @@ export class AddMovieListComponent implements OnInit {
     //   this.userName = response;
     //   console.log(response);
     // });
-    this.http.post<MovieList>(this.baseUrl + 'movielist', 
-    {
-      listName: this.listName
-    });
+    this.http.post<MovieList>(this.baseUrl + 'movielist', {
+        Name: this.listName
+      })
+    .subscribe(result => {
+        debugger;
+        this.lists = result;
+      }, error => console.error(error));
     // this.http.get<MovieList[]>(this.baseUrl + 'movielist').subscribe(result => {
-    //   // debugger;
+    //   debugger;
     //   this.lists = result;
     // }, error => console.error(error));
   }

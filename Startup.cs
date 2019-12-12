@@ -11,6 +11,11 @@ using movie_project.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using movie_project.API.Domain.Repositories;
+using movie_project.API.Persistence.Repositories;
+using movie_project.API.Domain.Services;
+using movie_project.API.Services;
+using AutoMapper;
 
 namespace movie_project
 {
@@ -30,6 +35,11 @@ namespace movie_project
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IMovieListRepository, MovieListRepository>();
+            services.AddScoped<IMovieListService, MovieListService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

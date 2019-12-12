@@ -8,6 +8,7 @@ using movie_project.API.Resources;
 using movie_project.API.Extensions;
 using movie_project.API.Domain.Services;
 using movie_project.Models;
+using AutoMapper;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,18 +19,23 @@ namespace movie_project.Controllers
     [Route("[controller]")]
     public class MovieListController : Controller
     {
-        private readonly IMovieListService _movielistService;
+        private readonly IMovieListService _movieListService;
+        private readonly IMapper _mapper;
 
-        public MovieListController(IMovieListService movielistService)
+        public MovieListController(IMovieListService movieListService, IMapper mapper)
         {
-            _movielistService = movielistService;
+            _movieListService = movieListService;
+            _mapper = mapper;
         }
 
         // GET: api/values
         [HttpGet]
-        public async Task<IEnumerable<MovieList>> GetAllAsync()
+        public async Task<IEnumerable<MovieListResource>> GetAllAsync()
         {
-            return await _movielistService.ListAsync();
+            var movieLists = await _movieListService.ListAsync();
+            var resources = _mapper.Map<IEnumerable<MovieList>, IEnumerable<MovieListResource>>(movieLists);
+
+            return resources;
         }
 
         // GET api/values/5
@@ -41,10 +47,19 @@ namespace movie_project.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody]MovieListResource movieList)
+        public async Task<IActionResult> PostAsync([FromBody]SaveMovieListResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
+
+            var movieList = _mapper.Map<SaveMovieListResource, MovieList>(resource);
+            var result = await _movieListService.SaveAsync(movieList); // error happens here
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var movieListResource = _mapper.Map<MovieList, MovieListResource>(result.MovieList);
+            return Ok(movieListResource);
         }
 
         // PUT api/values/5
