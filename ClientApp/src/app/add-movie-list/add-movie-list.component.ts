@@ -10,29 +10,33 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./add-movie-list.component.css']
 })
 export class AddMovieListComponent implements OnInit {
-  public userId = "";
-  public listName = "";
-  public userName: string;
+  public listName;
+  public lists;
 
-  constructor(private authorizeService: AuthorizeService) { 
-
-  }
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {}
 
   ngOnInit() {
     // maybe get user-id?
   }
 
   addListName() {
-    // debugger;
-    this.authorizeService.getUser().pipe(map(u => u && u.name)).subscribe(response => {
-      this.userName = response;
-      console.log(response);
+    debugger;
+    // this.authorizeService.getUser().pipe(map(u => u && u.name)).subscribe(response => {
+    //   this.userName = response;
+    //   console.log(response);
+    // });
+    this.http.post<MovieList>(this.baseUrl + 'movielist', 
+    {
+      listName: this.listName
     });
+    // this.http.get<MovieList[]>(this.baseUrl + 'movielist').subscribe(result => {
+    //   // debugger;
+    //   this.lists = result;
+    // }, error => console.error(error));
   }
 
 }
 
 interface MovieList {
-  userId: string;
   name: string;
 }

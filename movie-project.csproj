@@ -31,6 +31,16 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="API\" />
+    <Folder Include="API\Resources\" />
+    <Folder Include="API\Extensions\" />
+    <Folder Include="Models\" />
+    <Folder Include="API\Domain\" />
+    <Folder Include="API\Domain\Services\" />
+    <Folder Include="API\Services\" />
+    <Folder Include="API\Domain\Repositories\" />
+  </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
