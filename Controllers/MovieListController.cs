@@ -60,7 +60,7 @@ namespace movie_project.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
 
             var movieList = _mapper.Map<SaveMovieListResource, MovieList>(resource);
-            var result = await _movieListService.SaveAsync(movieList); // error happens here
+            var result = await _movieListService.SaveAsync(movieList);
 
             if (!result.Success)
                 return BadRequest(result.Message);

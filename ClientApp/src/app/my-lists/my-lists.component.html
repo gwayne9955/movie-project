@@ -1,1 +1,22 @@
-<p>my-lists works!</p>
+<h1 id="tableLabel">Your Movie Lists</h1>
+
+<p *ngIf="!movieLists"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="movieLists">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <!-- <th>Temp. (F)</th> -->
+        <!-- <th>Summary</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movieList of movieLists">
+        <td>{{ movieList.movieListId }}</td>
+        <td>{{ movieList.name }}</td>
+        <!-- <td>{{ forecast.temperatureF }}</td> -->
+        <!-- <td>{{ forecast.summary }}</td> -->
+      </tr>
+    </tbody>
+  </table>
