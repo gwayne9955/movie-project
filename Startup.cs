@@ -54,6 +54,7 @@ namespace movie_project
             services.AddScoped<IMovieListService, MovieListService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddSingleton<UserManager<ApplicationUser>();
             services.AddAutoMapper(typeof(Startup));
 
             // In production, the Angular files will be served from this directory
