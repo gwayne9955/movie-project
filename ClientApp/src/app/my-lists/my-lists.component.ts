@@ -7,11 +7,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./my-lists.component.css']
 })
 export class MyListsComponent implements OnInit {
-  public movieLists: MovieList[];
+  public movieLists: MovieListResponse;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    this.http.get<MovieList[]>(this.baseUrl + 'movielist').subscribe(result => {
-      debugger;
+    this.http.get<MovieListResponse>(this.baseUrl + 'movielist').subscribe(result => {
+      // debugger;
       this.movieLists = result;
     }, error => console.error(error));
   }
@@ -19,6 +19,11 @@ export class MyListsComponent implements OnInit {
   ngOnInit() {
   }
 
+}
+
+interface MovieListResponse {
+  items: MovieList[];
+  totalItems: number;
 }
 
 interface MovieList {

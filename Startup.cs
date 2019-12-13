@@ -33,6 +33,7 @@ namespace movie_project
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+            services.AddMemoryCache();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(
                     Configuration.GetConnectionString("DefaultConnection")));

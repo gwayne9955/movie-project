@@ -12,6 +12,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using movie_project.API.Domain.Queries;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -35,12 +36,17 @@ namespace movie_project.Controllers
 
         // GET: api/values
         [HttpGet]
-        public async Task<IEnumerable<MovieListResource>> GetAllAsync()
+        public async Task<QueryResultResource<MovieListResource>> GetAllAsync([FromQuery] MovieListsQueryResource query)
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            query.ApplicationUserRefId = userId;
 
-            var movieLists = await _movieListService.ListAsync();
-            var resources = _mapper.Map<IEnumerable<MovieList>, IEnumerable<MovieListResource>>(movieLists);
+            //var query = new MovieListsQueryResource(userId); // create a MovieListsQueryResource Object with user id
+
+            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
+
+            var queryResult = await _movieListService.ListAsync(movieListsQuery);
+            var resources = _mapper.Map<QueryResult<MovieList>, QueryResultResource<MovieListResource>>(queryResult);
 
             return resources;
         }
