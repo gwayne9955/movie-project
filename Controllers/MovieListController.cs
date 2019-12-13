@@ -40,8 +40,8 @@ namespace movie_project.Controllers
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             query.ApplicationUserRefId = userId;
-
             var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
+
             var queryResult = await _movieListService.ListAsync(movieListsQuery);
             var resources = _mapper.Map<QueryResult<MovieList>, QueryResultResource<MovieListResource>>(queryResult);
 
@@ -55,7 +55,7 @@ namespace movie_project.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var query = new MovieListsQueryResource();
+            var query = new MovieListsQueryResource(); // could potentially make these 4 lines a function
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             query.ApplicationUserRefId = userId;
             var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
@@ -76,11 +76,14 @@ namespace movie_project.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
+            var query = new MovieListsQueryResource();
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            query.ApplicationUserRefId = userId;
+            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
 
             var movieList = _mapper.Map<SaveMovieListResource, MovieList>(resource);
             movieList.ApplicationUserRefId = userId;
-            var result = await _movieListService.SaveAsync(movieList);
+            var result = await _movieListService.SaveAsync(movieList, movieListsQuery);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -96,8 +99,13 @@ namespace movie_project.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
+            var query = new MovieListsQueryResource();
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            query.ApplicationUserRefId = userId;
+            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
+
             var movieList = _mapper.Map<SaveMovieListResource, MovieList>(resource);
-            var result = await _movieListService.UpdateAsync(id, movieList);
+            var result = await _movieListService.UpdateAsync(id, movieList, movieListsQuery);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -110,7 +118,15 @@ namespace movie_project.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var result = await _movieListService.DeleteAsync(id);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var query = new MovieListsQueryResource();
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            query.ApplicationUserRefId = userId;
+            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
+
+            var result = await _movieListService.DeleteAsync(id, movieListsQuery);
 
             if (!result.Success)
                 return BadRequest(result.Message);

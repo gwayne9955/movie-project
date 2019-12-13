@@ -10,7 +10,7 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./add-movie-list.component.css']
 })
 export class AddMovieListComponent implements OnInit {
-  public listName;
+  public listName: string;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {}
 
@@ -29,11 +29,9 @@ export class AddMovieListComponent implements OnInit {
       })
     .subscribe(result => {
         debugger;
+        alert("added " + this.listName);
+        this.listName = "";
       }, error => console.error(error));
-    // this.http.get<MovieList[]>(this.baseUrl + 'movielist').subscribe(result => {
-    //   debugger;
-    //   this.lists = result;
-    // }, error => console.error(error));
   }
 
 }

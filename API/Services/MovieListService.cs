@@ -61,7 +61,7 @@ namespace movie_project.API.Services
             return new MovieListResponse(existingMovieList);
         }
 
-        public async Task<MovieListResponse> SaveAsync(MovieList movieList)
+        public async Task<MovieListResponse> SaveAsync(MovieList movieList, MovieListsQuery query)
         {
             try
             {
@@ -77,11 +77,11 @@ namespace movie_project.API.Services
             }
         }
 
-        public async Task<MovieListResponse> UpdateAsync(int id, MovieList movieList)
+        public async Task<MovieListResponse> UpdateAsync(int id, MovieList movieList, MovieListsQuery query)
         {
             var existingMovieList = await _movieListRepository.FindByIdAsync(id);
 
-            if (existingMovieList == null)
+            if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId).Equals(query.ApplicationUserRefId))
                 return new MovieListResponse("MovieList not found.");
 
             existingMovieList.Name = movieList.Name;
@@ -100,11 +100,11 @@ namespace movie_project.API.Services
             }
         }
 
-        public async Task<MovieListResponse> DeleteAsync(int id)
+        public async Task<MovieListResponse> DeleteAsync(int id, MovieListsQuery query)
         {
             var existingMovieList = await _movieListRepository.FindByIdAsync(id);
 
-            if (existingMovieList == null)
+            if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId).Equals(query.ApplicationUserRefId))
                 return new MovieListResponse("MovieList not found.");
 
             try

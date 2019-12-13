@@ -11,7 +11,6 @@ export class MyListsComponent implements OnInit {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     this.http.get<MovieListResponse>(this.baseUrl + 'movielist').subscribe(result => {
-      // debugger;
       this.movieLists = result;
     }, error => console.error(error));
   }

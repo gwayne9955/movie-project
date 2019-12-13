@@ -11,8 +11,8 @@ namespace movie_project.API.Domain.Services
     {
         Task<QueryResult<MovieList>> ListAsync(MovieListsQuery query);
         Task<MovieListResponse> ListAsync(int id, MovieListsQuery query);
-        Task<MovieListResponse> SaveAsync(MovieList movieList);
-        Task<MovieListResponse> UpdateAsync(int id, MovieList movieList);
-        Task<MovieListResponse> DeleteAsync(int id);
+        Task<MovieListResponse> SaveAsync(MovieList movieList, MovieListsQuery query);
+        Task<MovieListResponse> UpdateAsync(int id, MovieList movieList, MovieListsQuery query);
+        Task<MovieListResponse> DeleteAsync(int id, MovieListsQuery query);
     }
 }
