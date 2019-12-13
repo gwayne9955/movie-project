@@ -31,12 +31,34 @@ namespace movie_project.API.Services
             // items per page. I have to compose a cache to avoid returning wrong data.
             string cacheKey = GetCacheKeyForMovieListsQuery(query);
 
-            var products = await _cache.GetOrCreateAsync(cacheKey, (entry) => {
+            var movieLists = await _cache.GetOrCreateAsync(cacheKey, (entry) => {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
                 return _movieListRepository.ListAsync(query);
             });
 
-            return products;
+            return movieLists;
+        }
+
+        public async Task<MovieListResponse> ListAsync(int id, MovieListsQuery query)
+        {
+            // Here I list the query result from cache if they exist, but now the data can vary according to the category ID, page and amount of
+            // items per page. I have to compose a cache to avoid returning wrong data.
+            //string cacheKey = GetCacheKeyForMovieListsQuery(query);
+
+            //var movieList = await _cache.GetOrCreateAsync(cacheKey, (entry) => {
+            //    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
+            //    return _movieListRepository.FindByIdAsync(id);
+            //});
+            
+
+            //return movieList;
+
+            var existingMovieList = await _movieListRepository.FindByIdAsync(id);
+
+            if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId).Equals(query.ApplicationUserRefId))
+                return new MovieListResponse("MovieList not found.");
+
+            return new MovieListResponse(existingMovieList);
         }
 
         public async Task<MovieListResponse> SaveAsync(MovieList movieList)

@@ -53,7 +53,9 @@ namespace movie_project.API.Persistence.Repositories
 
         public async Task<MovieList> FindByIdAsync(int id)
         {
-            return await _context.MovieLists.FindAsync(id);
+            return await _context.MovieLists
+                                 .Include(m => m.ApplicationUser)
+                                 .FirstOrDefaultAsync(p => p.MovieListId == id); // Since Include changes the method return, we can't use FindAsync
         }
 
         public void Update(MovieList movieList)

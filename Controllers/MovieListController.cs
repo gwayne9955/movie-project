@@ -39,7 +39,7 @@ namespace movie_project.Controllers
         public async Task<QueryResultResource<MovieListResource>> GetAllAsync([FromQuery] MovieListsQueryResource query)
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            query.ApplicationUserRefId = userId; // create a MovieListsQueryResource Object with user id
+            query.ApplicationUserRefId = userId;
 
             var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
             var queryResult = await _movieListService.ListAsync(movieListsQuery);
@@ -48,11 +48,25 @@ namespace movie_project.Controllers
             return resources;
         }
 
-        // GET api/values/5
+        // GET api/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var query = new MovieListsQueryResource();
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            query.ApplicationUserRefId = userId;
+            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
+
+            var result = await _movieListService.ListAsync(id, movieListsQuery);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var movieListResource = _mapper.Map<MovieList, MovieListResource>(result.MovieList);
+            return Ok(movieListResource);
         }
 
         // POST api/values

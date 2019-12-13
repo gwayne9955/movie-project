@@ -10,6 +10,7 @@ namespace movie_project.API.Domain.Services
     public interface IMovieListService
     {
         Task<QueryResult<MovieList>> ListAsync(MovieListsQuery query);
+        Task<MovieListResponse> ListAsync(int id, MovieListsQuery query);
         Task<MovieListResponse> SaveAsync(MovieList movieList);
         Task<MovieListResponse> UpdateAsync(int id, MovieList movieList);
         Task<MovieListResponse> DeleteAsync(int id);
