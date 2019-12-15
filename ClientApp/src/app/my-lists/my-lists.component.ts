@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitterService } from '../event-emitter.service';    
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-lists',
@@ -12,7 +13,8 @@ export class MyListsComponent implements OnInit {
 
   constructor(private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string,
-    private eventEmitterService: EventEmitterService) {
+    private eventEmitterService: EventEmitterService,
+    private router: Router) {
     this.getMovieLists();
   }
 

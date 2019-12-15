@@ -27,6 +27,7 @@ export class AddMovieListComponent implements OnInit {
     .subscribe(result => {
         alert("added " + this.listName);
         this.listName = "";
+        this.router.navigateByUrl('/my-lists');
       }, error => console.error(error));
   }
 
