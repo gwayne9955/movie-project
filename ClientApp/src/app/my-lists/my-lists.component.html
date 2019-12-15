@@ -7,16 +7,12 @@
       <tr>
         <th>Id</th>
         <th>Name</th>
-        <!-- <th>Temp. (F)</th> -->
-        <!-- <th>Summary</th> -->
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let movieList of movieLists.items">
         <td>{{ movieList.movieListId }}</td>
-        <td>{{ movieList.name }}</td>
-        <!-- <td>{{ forecast.temperatureF }}</td> -->
-        <!-- <td>{{ forecast.summary }}</td> -->
+        <td><a [routerLink]="movieList.movieListId">{{ movieList.name }}</a></td>
       </tr>
     </tbody>
   </table>

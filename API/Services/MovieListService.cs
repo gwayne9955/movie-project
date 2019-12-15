@@ -31,10 +31,12 @@ namespace movie_project.API.Services
             // items per page. I have to compose a cache to avoid returning wrong data.
             string cacheKey = GetCacheKeyForMovieListsQuery(query);
 
-            var movieLists = await _cache.GetOrCreateAsync(cacheKey, (entry) => {
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
-                return _movieListRepository.ListAsync(query);
-            });
+            //var movieLists = await _cache.GetOrCreateAsync(cacheKey, (entry) => {
+            //    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
+            //    return _movieListRepository.ListAsync(query);
+            //});
+
+            var movieLists = await _movieListRepository.ListAsync(query);
 
             return movieLists;
         }

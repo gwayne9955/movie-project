@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { AuthorizeService } from '../../api-authorization/authorize.service';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { MyListsComponent } from '../my-lists/my-lists.component';
+// import { MyListsComponent}
 
 @Component({
   selector: 'app-add-movie-list',
@@ -19,12 +21,10 @@ export class AddMovieListComponent implements OnInit {
   }
 
   addListName() {
-    debugger;
     this.http.post<MovieList>(this.baseUrl + 'movielist', {
         Name: this.listName
       })
     .subscribe(result => {
-        debugger;
         alert("added " + this.listName);
         this.listName = "";
       }, error => console.error(error));

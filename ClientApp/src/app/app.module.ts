@@ -15,6 +15,7 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { AddMovieListComponent } from './add-movie-list/add-movie-list.component';
 import { MyListsComponent } from './my-lists/my-lists.component';
 import { MovieListDetailsComponent } from './movie-list-details/movie-list-details.component';
+import { EventEmitterService } from './event-emitter.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MovieListDetailsComponent } from './movie-list-details/movie-list-detai
     ])
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
+    EventEmitterService
   ],
   bootstrap: [AppComponent]
 })
