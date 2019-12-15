@@ -37,8 +37,8 @@ import { MovieListDetailsComponent } from './movie-list-details/movie-list-detai
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'add-movie-list', component: AddMovieListComponent, canActivate: [AuthorizeGuard] },
-      { path: 'my-lists', component: MyListsComponent, canActivate: [AuthorizeGuard] }
-      // { path: 'my-lists/:id', component: MovieListDetailsComponent, canActivate: [AuthorizeGuard] }
+      { path: 'my-lists', component: MyListsComponent, canActivate: [AuthorizeGuard] },
+      { path: 'my-lists/:id', component: MovieListDetailsComponent, canActivate: [AuthorizeGuard] }
     ])
   ],
   providers: [

@@ -1,1 +1,5 @@
-<p>movie-list-details works!</p>
+<p *ngIf="!movieList"><em>Loading...</em></p>
+
+<div *ngIf="movieList">
+    <h1 id="tableLabel">{{ movieList.name }}</h1>
+</div>

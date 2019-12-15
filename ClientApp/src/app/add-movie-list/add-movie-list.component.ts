@@ -20,10 +20,6 @@ export class AddMovieListComponent implements OnInit {
 
   addListName() {
     debugger;
-    // this.authorizeService.getUser().pipe(map(u => u && u.name)).subscribe(response => {
-    //   this.userName = response;
-    //   console.log(response);
-    // });
     this.http.post<MovieList>(this.baseUrl + 'movielist', {
         Name: this.listName
       })

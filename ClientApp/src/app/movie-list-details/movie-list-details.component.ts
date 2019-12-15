@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-movie-list-details',
@@ -8,12 +9,17 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class MovieListDetailsComponent implements OnInit, OnDestroy {
   private routeSub;
-  constructor(private route: ActivatedRoute) { }
+  private movieList: MovieList;
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
-      console.log(params); // log the entire params object
-      console.log(params['id']); // log the value of id
+      // console.log(params); // log the entire params object
+      // console.log(params['id']); // log the value of id
+      this.http.get<MovieList>(this.baseUrl + 'movielist/' + params['id'])
+      .subscribe(result => {
+        this.movieList = result;
+      }, error => console.error(error));
     });
   }
 
@@ -21,4 +27,10 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
     this.routeSub.unsubscribe();
   }
 
+}
+
+interface MovieList {
+  movieListId: number;
+  name: string;
+  // Movies: 
 }
