@@ -1,18 +1,30 @@
 <div>
     Search here: <input [(ngModel)]="searchQueryString" (keyup)="searchQueryOnKeyUp($event)">
-
 </div>
 
-<!-- <p *ngIf="!movieList"><em>Loading...</em></p>
+<p *ngIf="!movieSearchResult"><em>Search Results Here...</em></p>
 
-<div *ngIf="movieList">
-    <h1 id="tableLabel">{{ movieList.name }}</h1>
-    <div>
-        <input [(ngModel)]="movieListEditName">
-        <button (click)="editListName()"> Edit Movie List Name </button> 
-    </div>
-    <div>
-        <button (click)="deleteMovieList()"> Delete Movie List </button>
-    </div>
+<div *ngIf="movieSearchResult">
+    <h1 id="tableLabel">Search Results for '{{ searchQueryString }}'</h1>
+    <table class='table table-striped' aria-labelledby="tableLabel">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>ImdbID</th>
+            <th>Type</th>
+            <th>Poster</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movieSearchListing of movieSearchResult.Search">
+            <td>{{ movieSearchListing.Title }}</td>
+            <td>{{ movieSearchListing.Year }}</td>
+            <td>{{ movieSearchListing.imdbID }}</td>
+            <td>{{ movieSearchListing.Type }}</td>
+            <td>{{ movieSearchListing.Poster }}</td>
+          </tr>
+        </tbody>
+      </table>
 
-</div> -->
+</div>

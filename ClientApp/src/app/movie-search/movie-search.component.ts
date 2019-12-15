@@ -24,7 +24,7 @@ export class MovieSearchComponent implements OnInit {
           s: this.searchQueryString
         }})
       .subscribe(result => {
-        debugger;
+        // debugger;
         this.movieSearchResult = result;
       }, error => console.error(error));
     }
@@ -32,7 +32,6 @@ export class MovieSearchComponent implements OnInit {
 
   ngOnInit() {
   }
-
   
 }
 
