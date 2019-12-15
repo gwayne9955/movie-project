@@ -14,6 +14,7 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { AddMovieListComponent } from './add-movie-list/add-movie-list.component';
 import { MyListsComponent } from './my-lists/my-lists.component';
+import { MovieListDetailsComponent } from './movie-list-details/movie-list-details.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MyListsComponent } from './my-lists/my-lists.component';
     CounterComponent,
     FetchDataComponent,
     AddMovieListComponent,
-    MyListsComponent
+    MyListsComponent,
+    MovieListDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,6 +38,7 @@ import { MyListsComponent } from './my-lists/my-lists.component';
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'add-movie-list', component: AddMovieListComponent, canActivate: [AuthorizeGuard] },
       { path: 'my-lists', component: MyListsComponent, canActivate: [AuthorizeGuard] }
+      // { path: 'my-lists/:id', component: MovieListDetailsComponent, canActivate: [AuthorizeGuard] }
     ])
   ],
   providers: [
