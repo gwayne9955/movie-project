@@ -4,7 +4,7 @@ import { AuthorizeService } from '../../api-authorization/authorize.service';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { MyListsComponent } from '../my-lists/my-lists.component';
-// import { MyListsComponent}
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-movie-list',
@@ -14,7 +14,9 @@ import { MyListsComponent } from '../my-lists/my-lists.component';
 export class AddMovieListComponent implements OnInit {
   public listName: string;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {}
+  constructor(private http: HttpClient, 
+    @Inject('BASE_URL') private baseUrl: string,
+    private router: Router) {}
 
   ngOnInit() {
     // maybe get user-id?

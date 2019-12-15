@@ -1,4 +1,9 @@
-<p *ngIf="!movieList"><em>Loading...</em></p>
+<div>
+    Search here: <input [(ngModel)]="searchQueryString" (keyup)="searchQueryOnKeyUp($event)">
+
+</div>
+
+<!-- <p *ngIf="!movieList"><em>Loading...</em></p>
 
 <div *ngIf="movieList">
     <h1 id="tableLabel">{{ movieList.name }}</h1>
@@ -10,4 +15,4 @@
         <button (click)="deleteMovieList()"> Delete Movie List </button>
     </div>
 
-</div>
+</div> -->

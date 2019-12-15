@@ -57,7 +57,7 @@ namespace movie_project.API.Services
 
             var existingMovieList = await _movieListRepository.FindByIdAsync(id);
 
-            if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId).Equals(query.ApplicationUserRefId))
+            if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId.Equals(query.ApplicationUserRefId)))
                 return new MovieListResponse("MovieList not found.");
 
             return new MovieListResponse(existingMovieList);
@@ -83,7 +83,7 @@ namespace movie_project.API.Services
         {
             var existingMovieList = await _movieListRepository.FindByIdAsync(id);
 
-            if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId).Equals(query.ApplicationUserRefId))
+            if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId.Equals(query.ApplicationUserRefId)))
                 return new MovieListResponse("MovieList not found.");
 
             existingMovieList.Name = movieList.Name;
@@ -106,7 +106,7 @@ namespace movie_project.API.Services
         {
             var existingMovieList = await _movieListRepository.FindByIdAsync(id);
 
-            if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId).Equals(query.ApplicationUserRefId))
+            if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId.Equals(query.ApplicationUserRefId)))
                 return new MovieListResponse("MovieList not found.");
 
             try
