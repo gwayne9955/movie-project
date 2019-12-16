@@ -42,10 +42,10 @@ export class MovieDetailsComponent implements OnInit {
     this.http.post<MoviePost>(this.baseUrl + 'movie', {
       Name: this.movie.Title,
       imdbID: this.movie.imdbID,
-      MovieListRefId: 1
+      MovieListRefId: 10
     })
   .subscribe(result => {
-    debugger;
+    // debugger;
       alert("added " + this.movie.Title);
       // this.listName = "";
       // this.router.navigateByUrl('/my-lists');

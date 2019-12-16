@@ -17,7 +17,7 @@ export class MovieSearchComponent implements OnInit {
   private router: Router) { }
 
   searchQueryOnKeyUp(e) {
-    if (this.searchQueryString.length >= 3) {
+    if (this.searchQueryString && this.searchQueryString.length >= 3) {
       this.http.get<MovieSearchResult>("https://www.omdbapi.com/", {
         params: {
           apikey: "281cdd33",

@@ -1,7 +1,7 @@
 <p *ngIf="!movieList"><em>Loading...</em></p>
 
 <div *ngIf="movieList">
-    <h1 id="tableLabel">{{ movieList.name }}</h1>
+    <h1 id="buttonslabel">{{ movieList.name }}</h1>
     <div>
         <input [(ngModel)]="movieListEditName">
         <button (click)="editListName()"> Edit Movie List Name </button> 
@@ -9,5 +9,21 @@
     <div>
         <button (click)="deleteMovieList()"> Delete Movie List </button>
     </div>
+
+    <h2 id="tableLabel">Movies in this movie list</h2>
+    <table class='table table-striped' aria-labelledby="tableLabel">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>ImdbID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of movieList.movies">
+            <td><a [routerLink]="['/movie', movie.imdbID]">{{ movie.name }}</a></td>
+            <td>{{ movie.imdbID }}</td>
+          </tr>
+        </tbody>
+      </table>
 
 </div>

@@ -57,8 +57,14 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
   }
 }
 
+interface Movie {
+  movieListRefID: number;
+  name: string;
+  imdbID: string;
+}
+
 interface MovieList {
   movieListId: number;
   name: string;
-  // Movies: 
+  movies: Movie[];
 }

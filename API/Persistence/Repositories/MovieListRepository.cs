@@ -55,6 +55,7 @@ namespace movie_project.API.Persistence.Repositories
         {
             return await _context.MovieLists
                                  .Include(m => m.ApplicationUser)
+                                 .Include(m=> m.Movies)
                                  .FirstOrDefaultAsync(p => p.MovieListId == id); // Since Include changes the method return, we can't use FindAsync
         }
 
