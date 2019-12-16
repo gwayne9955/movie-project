@@ -40,7 +40,7 @@ namespace movie_project.Controllers
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             query.ApplicationUserRefId = userId;
-            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieeQQuery>(query);
+            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
 
             var queryResult = await _movieListService.ListAsync(movieListsQuery);
             var resources = _mapper.Map<QueryResult<MovieList>, QueryResultResource<MovieListResource>>(queryResult);
@@ -58,7 +58,7 @@ namespace movie_project.Controllers
             var query = new MovieListsQueryResource(); // could potentially make these 4 lines a function
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             query.ApplicationUserRefId = userId;
-            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieeQQuery>(query);
+            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
 
             var result = await _movieListService.ListAsync(id, movieListsQuery);
 
@@ -79,7 +79,7 @@ namespace movie_project.Controllers
             var query = new MovieListsQueryResource();
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             query.ApplicationUserRefId = userId;
-            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieeQQuery>(query);
+            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
 
             var movieList = _mapper.Map<SaveMovieListResource, MovieList>(resource);
             movieList.ApplicationUserRefId = userId;
@@ -102,7 +102,7 @@ namespace movie_project.Controllers
             var query = new MovieListsQueryResource();
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             query.ApplicationUserRefId = userId;
-            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieeQQuery>(query);
+            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
 
             var movieList = _mapper.Map<SaveMovieListResource, MovieList>(resource);
             var result = await _movieListService.UpdateAsync(id, movieList, movieListsQuery);
@@ -124,7 +124,7 @@ namespace movie_project.Controllers
             var query = new MovieListsQueryResource();
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             query.ApplicationUserRefId = userId;
-            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieeQQuery>(query);
+            var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
 
             var result = await _movieListService.DeleteAsync(id, movieListsQuery);
 
