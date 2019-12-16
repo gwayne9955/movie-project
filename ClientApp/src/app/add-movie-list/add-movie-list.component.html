@@ -1,7 +1,7 @@
 <h1 id="tableLabel">Add a Movie List</h1>
 
 <div>
-    Name of list:<input [(ngModel)]="listName">
+    Name of list:<input (keyup)="toggleAbleToAdd()" [(ngModel)]="listName">
 </div>
 
 <button (click)="addListName()">Add List!</button>

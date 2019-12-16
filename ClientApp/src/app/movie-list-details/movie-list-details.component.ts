@@ -54,7 +54,6 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
       this.http.delete<MovieList>(this.baseUrl + 'movielist/' + this.id)
         .subscribe(result => {
           alert("MovieList '" + result.name + "' deleted");
-          // this.eventEmitterService.onMyListsComponentButtonClick();
           this.router.navigateByUrl('/my-lists');
         }, error => console.error(error));
     }
@@ -65,8 +64,6 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
         .subscribe(result => {
           this.getMovieList();
           alert("Movie '" + result.name + "' deleted");
-          // this.eventEmitterService.onMyListsComponentButtonClick();
-          // this.router.navigateByUrl('/my-lists');
         }, error => console.error(error));
   }
 }

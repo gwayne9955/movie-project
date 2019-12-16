@@ -13,10 +13,13 @@ import { Router } from '@angular/router';
 })
 export class AddMovieListComponent implements OnInit {
   public listName: string;
+  public ableToAdd: boolean;
 
   constructor(private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string,
-    private router: Router) {}
+    private router: Router) {
+      this.ableToAdd = false;
+    }
 
   ngOnInit() {
     // maybe get user-id?
@@ -31,6 +34,15 @@ export class AddMovieListComponent implements OnInit {
         this.listName = "";
         this.router.navigateByUrl('/my-lists');
       }, error => console.error(error));
+  }
+
+  toggleAbleToAdd() {
+    if (this.listName.length > 0 && !this.ableToAdd) {
+      this.ableToAdd = true;
+    }
+    else if (this.listName.length == 0 && this.ableToAdd) {
+      this.ableToAdd = false;
+    }
   }
 
 }
