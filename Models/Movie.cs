@@ -6,7 +6,8 @@ namespace movie_project.Models
 {
     public class Movie
     {
-        [Key, Column(Order = 1, TypeName = "varchar(255)")]
+        //[Key]
+        [Column(Order = 0, TypeName = "varchar(255)")]
         [Required]
         //[Column(TypeName = "varchar(255)")]
         public string imdbID { get; set; }
@@ -15,8 +16,9 @@ namespace movie_project.Models
         [Column(TypeName = "varchar(255)")]
         public string Name { get; set; }
 
-        [Key, Column(Order = 2)]
+        //[Key]
         [Required]
+        [Column(Order = 1)]
         [ForeignKey("MovieList")]
         public int MovieListRefId { get; set; }
         public MovieList MovieList { get; set; }

@@ -22,5 +22,11 @@ namespace movie_project.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<MovieList> MovieLists { get; set; }
         public DbSet<Movie> Movies { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Movie>()
+                .HasKey(m => new { m.imdbID, m.MovieListRefId });
+        }
     }
 }
