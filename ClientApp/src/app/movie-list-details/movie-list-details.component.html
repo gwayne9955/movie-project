@@ -16,12 +16,14 @@
           <tr>
             <th>Title</th>
             <th>ImdbID</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let movie of movieList.movies">
             <td><a [routerLink]="['/movie', movie.imdbID]">{{ movie.name }}</a></td>
             <td>{{ movie.imdbID }}</td>
+            <td><button (click)="deleteMovieFromList(movie.imdbID)">Delete</button></td>
           </tr>
         </tbody>
       </table>

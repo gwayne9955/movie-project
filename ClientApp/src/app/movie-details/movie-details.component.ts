@@ -42,7 +42,7 @@ export class MovieDetailsComponent implements OnInit {
     this.http.post<MoviePost>(this.baseUrl + 'movie', {
       Name: this.movie.Title,
       imdbID: this.movie.imdbID,
-      MovieListRefId: 10
+      MovieListRefId: 11
     })
   .subscribe(result => {
     // debugger;

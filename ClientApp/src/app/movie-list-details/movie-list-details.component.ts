@@ -23,15 +23,19 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
       this.id = params['id'];
-      this.http.get<MovieList>(this.baseUrl + 'movielist/' + params['id'])
-      .subscribe(result => {
-        this.movieList = result;
-      }, error => console.error(error));
+      this.getMovieList();
     });
   }
 
   ngOnDestroy() {
     this.routeSub.unsubscribe();
+  }
+
+  getMovieList() {
+    this.http.get<MovieList>(this.baseUrl + 'movielist/' + this.id)
+      .subscribe(result => {
+        this.movieList = result;
+      }, error => console.error(error));
   }
 
   editListName() {
@@ -54,6 +58,16 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
           this.router.navigateByUrl('/my-lists');
         }, error => console.error(error));
     }
+  }
+
+  deleteMovieFromList(imdbID: string) {
+    this.http.delete<MovieList>(this.baseUrl + `movie/${this.id}/${imdbID}`)
+        .subscribe(result => {
+          this.getMovieList();
+          alert("Movie '" + result.name + "' deleted");
+          // this.eventEmitterService.onMyListsComponentButtonClick();
+          // this.router.navigateByUrl('/my-lists');
+        }, error => console.error(error));
   }
 }
 

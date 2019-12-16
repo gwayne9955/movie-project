@@ -114,8 +114,8 @@ namespace movie_project.Controllers
         //}
 
         // DELETE api/values/5
-        [HttpDelete("{id}")] // the list id, the resource has the imdb id
-        public async Task<IActionResult> DeleteAsync(int id, [FromBody]SaveMovieResource resource)
+        [HttpDelete("{listId}/{imdbID}")] // the list id, the resource has the imdb id
+        public async Task<IActionResult> DeleteAsync(int listId, string imdbID)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
@@ -125,7 +125,7 @@ namespace movie_project.Controllers
             query.ApplicationUserRefId = userId;
             var moviesQuery = _mapper.Map<MoviesQueryResource, MoviesQuery>(query);
 
-            var result = await _movieService.DeleteAsync(id, moviesQuery, resource.imdbID);
+            var result = await _movieService.DeleteAsync(listId, moviesQuery, imdbID);
 
             if (!result.Success)
                 return BadRequest(result.Message);
