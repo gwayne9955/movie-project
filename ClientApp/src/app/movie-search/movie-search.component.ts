@@ -24,9 +24,11 @@ export class MovieSearchComponent implements OnInit {
           s: this.searchQueryString
         }})
       .subscribe(result => {
-        // debugger;
         this.movieSearchResult = result;
       }, error => console.error(error));
+    }
+    else {
+      this.movieSearchResult = null;
     }
   }
 

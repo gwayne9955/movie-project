@@ -18,11 +18,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let movieSearchListing of movieSearchResult.Search">
-            <td>{{ movieSearchListing.Title }}</td>
+            <td><a [routerLink]="['/movie', movieSearchListing.imdbID]">{{ movieSearchListing.Title }}</a></td>
             <td>{{ movieSearchListing.Year }}</td>
             <td>{{ movieSearchListing.imdbID }}</td>
             <td>{{ movieSearchListing.Type }}</td>
-            <td>{{ movieSearchListing.Poster }}</td>
+            <td><img src="{{movieSearchListing.Poster}}"></td>
           </tr>
         </tbody>
       </table>

@@ -23,8 +23,6 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
       this.id = params['id'];
-      // console.log(params); // log the entire params object
-      // console.log(params['id']); // log the value of id
       this.http.get<MovieList>(this.baseUrl + 'movielist/' + params['id'])
       .subscribe(result => {
         this.movieList = result;

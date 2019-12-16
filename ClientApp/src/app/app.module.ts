@@ -15,6 +15,7 @@ import { MyListsComponent } from './my-lists/my-lists.component';
 import { MovieListDetailsComponent } from './movie-list-details/movie-list-details.component';
 import { EventEmitterService } from './event-emitter.service';
 import { MovieSearchComponent } from './movie-search/movie-search.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MovieSearchComponent } from './movie-search/movie-search.component';
     AddMovieListComponent,
     MyListsComponent,
     MovieListDetailsComponent,
-    MovieSearchComponent
+    MovieSearchComponent,
+    MovieDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,7 +38,9 @@ import { MovieSearchComponent } from './movie-search/movie-search.component';
       { path: 'search', component: MovieSearchComponent },
       { path: 'add-movie-list', component: AddMovieListComponent, canActivate: [AuthorizeGuard] },
       { path: 'my-lists', component: MyListsComponent, canActivate: [AuthorizeGuard] },
-      { path: 'my-lists/:id', component: MovieListDetailsComponent, canActivate: [AuthorizeGuard] }
+      { path: 'my-lists/:id', component: MovieListDetailsComponent, canActivate: [AuthorizeGuard] },
+      { path: 'movie/:id', component: MovieDetailsComponent },
+      { path: '**', component: HomeComponent, redirectTo: '' }
     ])
   ],
   providers: [

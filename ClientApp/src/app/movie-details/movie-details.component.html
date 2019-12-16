@@ -1,0 +1,13 @@
+<p *ngIf="!movie"><em>Loading...</em></p>
+
+<div *ngIf="movie">
+    <h1 id="tableLabel">{{ movie.Title }}</h1>
+    <img src="{{movie.Poster}}">
+    <div>
+        <button (click)="addMovieToMovieList()"> Add movie to movie list </button> 
+    </div>
+    <!-- <div>
+        <button (click)="deleteMovieList()"> Delete Movie List </button>
+    </div> -->
+
+</div>
