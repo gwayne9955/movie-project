@@ -52,6 +52,8 @@ namespace movie_project
 
             services.AddScoped<IMovieListRepository, MovieListRepository>();
             services.AddScoped<IMovieListService, MovieListService>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAutoMapper(typeof(Startup));

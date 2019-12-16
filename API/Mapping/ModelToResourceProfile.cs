@@ -11,6 +11,8 @@ namespace movie_project.API.Mapping
         {
             CreateMap<MovieList, MovieListResource>();
             CreateMap<QueryResult<MovieList>, QueryResultResource<MovieListResource>>();
+            CreateMap<Movie, MovieResource>();
+            CreateMap<QueryResult<Movie>, QueryResultResource<MovieResource>>();
         }
     }
 }

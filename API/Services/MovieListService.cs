@@ -75,7 +75,7 @@ namespace movie_project.API.Services
             catch (Exception ex)
             {
                 // Do some logging stuff
-                return new MovieListResponse($"An error occurred when saving the move list: {ex.Message}");
+                return new MovieListResponse($"An error occurred when saving the movie list: {ex.Message}");
             }
         }
 

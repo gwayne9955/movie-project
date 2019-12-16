@@ -39,9 +39,25 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   addMovieToMovieList() {
-    
+    this.http.post<MoviePost>(this.baseUrl + 'movie', {
+      Name: this.movie.Title,
+      imdbID: this.movie.imdbID,
+      MovieListRefId: 1
+    })
+  .subscribe(result => {
+    debugger;
+      alert("added " + this.movie.Title);
+      // this.listName = "";
+      // this.router.navigateByUrl('/my-lists');
+    }, error => console.error(error));
   }
 
+}
+
+interface MoviePost {
+  Name: string;
+  imdbId: string;
+  MovieListRefId: number;
 }
 
 interface Movie {
