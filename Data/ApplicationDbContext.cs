@@ -25,6 +25,7 @@ namespace movie_project.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.Entity<Movie>()
                 .HasKey(m => new { m.imdbID, m.MovieListRefId });
         }

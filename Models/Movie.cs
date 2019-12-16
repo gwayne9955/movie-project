@@ -6,7 +6,7 @@ namespace movie_project.Models
 {
     public class Movie
     {
-        //[Key]
+        [Key]
         [Column(Order = 0, TypeName = "varchar(255)")]
         [Required]
         //[Column(TypeName = "varchar(255)")]
