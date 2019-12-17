@@ -12,7 +12,7 @@ export class MovieSearchComponent implements OnInit {
   private searchQueryString: string;
   private tmdbResponse: TMDBResponse;
   private tmdbMovies;
-  private omdbListing: MovieSearchListing;
+  private omdbListing: OMDBMovieSearchTitle;
   private newArray;
   private pageNum: number;
   private columns: number;
@@ -23,8 +23,6 @@ export class MovieSearchComponent implements OnInit {
   private router: Router) {
     this.newArray = [];
     this.columns = 3;
-    this.pageNum = 1;
-    this.tmdbMovies = [];
   }
 
   ngOnInit() {
@@ -32,12 +30,14 @@ export class MovieSearchComponent implements OnInit {
     .queryParams
     .subscribe(params => {
       this.searchQueryString = params['q'] || "";
+      this.tmdbMovies = [];
+      this.pageNum = 1;
       this.searchQuery();
     });
   }
 
   searchQueryOnKeyUp() {
-      this.router.navigate(['search'], { queryParams: { q: this.searchQueryString}});
+    this.router.navigate(['search'], { queryParams: { q: this.searchQueryString}});
   }
 
   searchQuery() {
@@ -46,7 +46,10 @@ export class MovieSearchComponent implements OnInit {
         params: {
           api_key: "f28df3fec9ce98f371cc2a6636044a45",
           query: this.searchQueryString,
-          page: this.pageNum.toString()
+          page: this.pageNum.toString(),
+          include_adult: "false",
+          language: "en-US",
+          with_original_language: "en"
         }})
       .subscribe(result => {
         this.tmdbResponse = result;
@@ -59,19 +62,38 @@ export class MovieSearchComponent implements OnInit {
     }
     else {
       this.tmdbResponse = null;
+      this.newArray = [];
     }
   }
 
-  searchMovieClick(title: string) {
+  searchMovieClick(title: string, originalTitle: string) {
     title = title.replace("…", "...");
-    this.http.get<MovieSearchListing>("https://www.omdbapi.com/", {
+    originalTitle = originalTitle.replace("…", "...");
+    this.http.get<OMDBMovieSearchTitle>("https://www.omdbapi.com/", {
         params: {
           apikey: "281cdd33",
           t: title
         }})
       .subscribe(result => {
-        this.omdbListing = result;
-        this.router.navigateByUrl(`/movie/${this.omdbListing.imdbID}`);
+        if (result.Response == "True") {
+          this.omdbListing = result;
+          this.router.navigateByUrl(`/movie/${this.omdbListing.imdbID}`);
+        }
+        else {
+          this.searchMovieSecondaryTitle(originalTitle);
+        }
+      }, error => console.error(error));
+  }
+
+  searchMovieSecondaryTitle(originalTitle: string) {
+    this.http.get<OMDBMovieSearchTitle>("https://www.omdbapi.com/", {
+        params: {
+          apikey: "281cdd33",
+          t: originalTitle
+        }})
+      .subscribe(result => {
+          this.omdbListing = result;
+          this.router.navigateByUrl(`/movie/${this.omdbListing.imdbID}`);
       }, error => console.error(error));
   }
 
@@ -112,16 +134,30 @@ interface TMDBMovie {
   release_date: string;
 }
 
-interface MovieSearchResult {
-  Search: MovieSearchListing[];
-  totalResults: string;
-  Response: string;
-}
-
-interface MovieSearchListing {
+interface OMDBMovieSearchTitle {
   Title: string;
   Year: string;
+  Rated: string;
+  Released: string;
+  Runtime: string;
+  Genre: string;
+  Director: string;
+  Writer: string;
+  Actors: string;
+  Plot: string;
+  Language: string;
+  Country: string;
+  Awards: string;
+  Poster: string;
+  Ratings: number[];
+  Metascore: string;
+  imdbRating: string;
+  imdbVotes: string;
   imdbID: string;
   Type: string;
-  Poster: string;
+  DVD: string;
+  BoxOffice: string;
+  Production: string;
+  Website: string;
+  Response: string;
 }

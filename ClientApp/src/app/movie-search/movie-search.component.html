@@ -33,7 +33,7 @@
     <h1 id="tableLabel">Search Results for '{{ searchQueryString }}'</h1>
     <div class="row mg-bottom" *ngFor="let row of newArray">
       <ng-container *ngFor="let movieListing of row?.items">
-        <div class="card mb-4 box-shadow full-height" (click)="searchMovieClick(movieListing.title)">
+        <div class="card mb-4 box-shadow full-height" (click)="searchMovieClick(movieListing.title, movieListing.original_title)">
           <div class="card-body d-flex flex-column">
             <!-- <h1 class="card-title pricing-card-title">
               <small class="text-muted">/ {{item?.subTitle}}</small>
