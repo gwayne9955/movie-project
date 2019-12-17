@@ -1,10 +1,10 @@
 <div>
-    Search here: <input [(ngModel)]="searchQueryString" (keyup)="searchQueryOnKeyUp($event)">
+    Search here: <input id="searchInputField" autofocus [(ngModel)]="searchQueryString" (keyup)="searchQueryOnKeyUp()">
 </div>
 
 <p *ngIf="!movieSearchResult"><em>Search Results Here...</em></p>
 
-<div *ngIf="movieSearchResult">
+<!-- <div *ngIf="movieSearchResult">
     <h1 id="tableLabel">Search Results for '{{ searchQueryString }}'</h1>
     <table class='table table-striped' aria-labelledby="tableLabel">
         <thead>
@@ -27,4 +27,28 @@
         </tbody>
       </table>
 
+</div> -->
+<div *ngIf="tmdbResponse">
+  <div class="container m-t-md">
+    <h1 id="tableLabel">Search Results for '{{ searchQueryString }}'</h1>
+    <div class="row mg-bottom" *ngFor="let row of newArray">
+      <ng-container *ngFor="let movieListing of row?.items">
+        <div class="card mb-4 box-shadow full-height" (click)="searchMovieClick(movieListing.title)">
+          <div class="card-body d-flex flex-column">
+            <!-- <h1 class="card-title pricing-card-title">
+              <small class="text-muted">/ {{item?.subTitle}}</small>
+            </h1> -->
+            <ul class="list-unstyled mt-3 mb-4">
+              <img *ngIf="movieListing.poster_path" src='https://image.tmdb.org/t/p/w300/{{movieListing.poster_path}}'>
+              <img *ngIf="!movieListing.poster_path" src='https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png'>
+            </ul>
+            <!-- <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for free</button> -->
+          </div>
+          <div class="card-footer">
+            <h6 class="my-0 font-weight-normal">{{movieListing?.title}}</h6>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
 </div>

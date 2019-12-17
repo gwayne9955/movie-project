@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HomeComponent {
   private tmdbResponse: TMDBResponse;
   private tmdbMovies;
-  private omdbResponse: MovieSearchResult;
+  private omdbListing: MovieSearchListing;
   private newArray;
   private pageNum: number;
   private columns: number;
@@ -44,14 +44,15 @@ export class HomeComponent {
   }
 
   popularMovieClick(title: string) {
-    this.http.get<MovieSearchResult>("https://www.omdbapi.com/", {
+    title = title.replace("…", "...");
+    this.http.get<MovieSearchListing>("https://www.omdbapi.com/", {
         params: {
           apikey: "281cdd33",
-          s: title
+          t: title
         }})
       .subscribe(result => {
-        this.omdbResponse = result;
-        this.router.navigateByUrl(`/movie/${this.omdbResponse.Search[0].imdbID}`);
+        this.omdbListing = result;
+        this.router.navigateByUrl(`/movie/${this.omdbListing.imdbID}`);
       }, error => console.error(error));
   }
 

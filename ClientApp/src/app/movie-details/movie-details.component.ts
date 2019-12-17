@@ -11,7 +11,9 @@ import { EventEmitterService } from '../event-emitter.service';
 export class MovieDetailsComponent implements OnInit {
   private routeSub;
   private imdbID: string;
-  private movie: Movie;
+  private omdbMovie: Movie;
+  private tmdbMovieFind: TMDBMovieFind;
+  private tmdbMovie: TMDBMovie;
 
   constructor(private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string, 
@@ -22,6 +24,7 @@ export class MovieDetailsComponent implements OnInit {
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
       this.imdbID = params['id'];
+
       this.http.get<Movie>("https://www.omdbapi.com/", {
         params: {
           apikey: "281cdd33",
@@ -30,7 +33,17 @@ export class MovieDetailsComponent implements OnInit {
           tomatoes: "true"
         }})
       .subscribe(result => {
-        this.movie = result;
+        this.omdbMovie = result;
+      }, error => console.error(error));
+
+      this.http.get<TMDBMovieFind>(`https://api.themoviedb.org/3/find/${this.imdbID}`, {
+        params: {
+          api_key: "f28df3fec9ce98f371cc2a6636044a45",
+          external_source: "imdb_id"
+        }})
+      .subscribe(result => {
+        this.tmdbMovieFind = result;
+        this.tmdbMovie = this.tmdbMovieFind.movie_results[0] || null;
       }, error => console.error(error));
     });
   }
@@ -53,6 +66,31 @@ export class MovieDetailsComponent implements OnInit {
   //   }, error => console.error(error));
   }
 
+}
+
+interface TMDBMovieFind {
+  movie_results: TMDBMovie[];
+  person_results: any[];
+  tv_results: any[];
+  tv_episode_results: any[];
+  tv_season_results: any[];
+}
+
+interface TMDBMovie {
+  popularity: number;
+  vote_count: number;
+  video: boolean;
+  poster_path: string;
+  id: number;
+  adult: boolean;
+  backdrop_path: string;
+  original_language: string;
+  original_title: string;
+  genre_ids: number[];
+  title: string;
+  vote_average: number;
+  overview: string;
+  release_date: string;
 }
 
 interface MoviePost {

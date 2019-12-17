@@ -36,6 +36,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'search', component: MovieSearchComponent },
+      // { path: 'search/:query', component: MovieSearchComponent },
       { path: 'add-movie-list', component: AddMovieListComponent, canActivate: [AuthorizeGuard] },
       { path: 'my-lists', component: MyListsComponent, canActivate: [AuthorizeGuard] },
       { path: 'my-lists/:id', component: MovieListDetailsComponent, canActivate: [AuthorizeGuard] },
