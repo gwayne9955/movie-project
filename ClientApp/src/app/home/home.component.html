@@ -1,50 +1,6 @@
 <p *ngIf="!tmdbResponse"><em>Loading...</em></p>
 
 <div *ngIf="tmdbResponse">
-    <!-- <h1 id="tableLabel">Welcome to Movie Project</h1> -->
-    <!-- <table class='table table-striped' aria-labelledby="tableLabel">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Poster</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let movieListing of tmdbResponse.results">
-            <td><p (click)="popularMovieClick(movieListing.title)">{{ movieListing.title }}</p></td>
-            <td><img src='https://image.tmdb.org/t/p/w500/{{movieListing.poster_path}}'></td>
-          </tr>
-        </tbody>
-      </table> -->
-
-      <!-- <div class="app flex-row align-items-center">   
-        <div class="container"> 
-            <div class="card-deck row">
-                <div class="card col-md-4" *ngFor="let movieListing of tmdbResponse.results">
-                    <div class="card-block" (click)="popularMovieClick(movieListing.title)">
-                      <img src='https://image.tmdb.org/t/p/w500/{{movieListing.poster_path}}'>
-                      <h4 class="card-title">{{ movieListing.title }}</h4>
-                      <p class="card-text"> {{data.descripcion}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-    <!-- <div class="row">
-      <div class="col-lg-3"></div>
-      <div class="col-lg-9">
-        <div class="row">
-            <div class="col-lg-3" *ngFor="let movieListing of tmdbResponse.results; index as i">
-              <div class="card-block" (click)="popularMovieClick(movieListing.title)">
-                <img src='https://image.tmdb.org/t/p/w500/{{movieListing.poster_path}}'>
-                <h4 class="card-title">{{ movieListing.title }}</h4>
-                <p class="card-text"> {{data.descripcion}}</p>
-              </div>
-            </div>
-        </div>
-      </div> -->
-
       <div class="container m-t-md">
         <h1 style="text-align: center;" class="mg-bottom">Welcome to the Movie Project</h1>
         <div class="row mg-bottom" *ngFor="let row of newArray">
@@ -54,9 +10,11 @@
                 <!-- <h1 class="card-title pricing-card-title">
                   <small class="text-muted">/ {{item?.subTitle}}</small>
                 </h1> -->
-                <ul class="list-unstyled mt-3 mb-4">
-                  <img src='https://image.tmdb.org/t/p/w300/{{movieListing.poster_path}}'>
-                </ul>
+                <div class="my-auto">
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <img src='https://image.tmdb.org/t/p/w300/{{movieListing.poster_path}}'>
+                  </ul>
+                </div>
                 <!-- <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for free</button> -->
               </div>
               <div class="card-footer">
@@ -66,5 +24,4 @@
           </ng-container>
         </div>
       </div>
-
 </div>

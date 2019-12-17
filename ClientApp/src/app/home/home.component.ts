@@ -81,7 +81,7 @@ export class HomeComponent {
     //In chrome and some browser scroll is given to body tag
     let pos = (document.documentElement.scrollHeight || document.body.scrollHeight) - document.documentElement.clientHeight;
     let max = document.documentElement.scrollTop;
-    if (pos == max)   {
+    if (pos == max && this.pageNum < this.tmdbResponse.total_pages)   {
       this.pageNum++;
       this.getPopularMovies();
     }

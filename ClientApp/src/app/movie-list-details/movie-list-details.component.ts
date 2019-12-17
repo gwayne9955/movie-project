@@ -14,11 +14,19 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
   private id: number;
   private movieList: MovieList;
   private movieListEditName: string;
+  private movies;
+  private newArray;
+  private columns: number;
+
   constructor(private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string, 
     private route: ActivatedRoute, 
     private router: Router,
-    private eventEmitterService: EventEmitterService) { }
+    private eventEmitterService: EventEmitterService) {
+      this.newArray = [];
+      this.columns = 4;
+      this.movies = [];
+     }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
@@ -35,6 +43,10 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
     this.http.get<MovieList>(this.baseUrl + 'movielist/' + this.id)
       .subscribe(result => {
         this.movieList = result;
+        this.newArray = [];
+        for (let i = 0; i < this.movieList.movies.length; i += this.columns) {
+          this.newArray.push({ items: this.movieList.movies.slice(i, i + this.columns) });
+        }
       }, error => console.error(error));
   }
 
@@ -78,4 +90,5 @@ interface MovieList {
   movieListId: number;
   name: string;
   movies: Movie[];
+  posterURL: string;
 }

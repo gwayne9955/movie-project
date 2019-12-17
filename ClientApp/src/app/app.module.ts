@@ -16,6 +16,8 @@ import { MovieListDetailsComponent } from './movie-list-details/movie-list-detai
 import { EventEmitterService } from './event-emitter.service';
 import { MovieSearchComponent } from './movie-search/movie-search.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { AddMovieToMovieListModalComponent } from './add-movie-to-movie-list-modal/add-movie-to-movie-list-modal.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,17 +28,19 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     MyListsComponent,
     MovieListDetailsComponent,
     MovieSearchComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    AddMovieToMovieListModalComponent
   ],
+  entryComponents: [AddMovieToMovieListModalComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
+    NgbModalModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'search', component: MovieSearchComponent },
-      // { path: 'search/:query', component: MovieSearchComponent },
       { path: 'add-movie-list', component: AddMovieListComponent, canActivate: [AuthorizeGuard] },
       { path: 'my-lists', component: MyListsComponent, canActivate: [AuthorizeGuard] },
       { path: 'my-lists/:id', component: MovieListDetailsComponent, canActivate: [AuthorizeGuard] },

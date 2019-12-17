@@ -16,6 +16,9 @@ namespace movie_project.Models
         [Column(TypeName = "varchar(255)")]
         public string Name { get; set; }
 
+        [Column(TypeName = "varchar(255)")]
+        public string PosterURL { get; set; }
+
         //[Key]
         [Required]
         [Column(Order = 1)]

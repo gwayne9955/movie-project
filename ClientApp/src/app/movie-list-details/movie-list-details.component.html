@@ -11,21 +11,28 @@
     </div>
 
     <h2 id="tableLabel">Movies in this movie list</h2>
-    <table class='table table-striped' aria-labelledby="tableLabel">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>ImdbID</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let movie of movieList.movies">
-            <td><a [routerLink]="['/movie', movie.imdbID]">{{ movie.name }}</a></td>
-            <td>{{ movie.imdbID }}</td>
-            <td><button (click)="deleteMovieFromList(movie.imdbID)">Delete</button></td>
-          </tr>
-        </tbody>
-      </table>
+
+    <div *ngIf="movieList.movies.length > 0">
+      <div class="container m-t-md">
+        <div class="row mg-bottom" *ngFor="let row of newArray">
+          <ng-container *ngFor="let movieListing of row?.items">
+            <div class="card mb-4 box-shadow full-height" [routerLink]="['/movie', movieListing.imdbID]">
+              <div class="card-body d-flex flex-column">
+                <div class="my-auto">
+                  <ul class="list-unstyled mt-3 mb-4 my-auto">
+                    <img src='https://image.tmdb.org/t/p/w200/{{movieListing.posterURL}}'>
+                  </ul>
+                </div>
+                <!-- <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for free</button> -->
+              </div>
+              <div class="card-footer">
+                <h6 class="my-0 font-weight-normal">{{movieListing?.name}}</h6>
+                <button (click)="deleteMovieFromList(movieListing.imdbID)">Delete</button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+</div>
 
 </div>

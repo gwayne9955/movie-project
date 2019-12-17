@@ -1,0 +1,34 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Which movie list would you like to add this to?</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+            <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="movieLists">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let movieList of movieLists.items">
+                    <td>{{ movieList.movieListId }}</td>
+                    <td><p (click)="selectMovieListToAddTo(movieList.movieListId)">{{ movieList.name }}</p></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </form>
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div> -->
+  </ng-template>
+  
+  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+  

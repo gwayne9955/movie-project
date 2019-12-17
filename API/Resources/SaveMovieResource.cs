@@ -12,6 +12,8 @@ namespace movie_project.API.Resources
         [Required]
         public string imdbID { get; set; }
 
+        public string PosterURL { get; set; }
+
         [Required]
         [ForeignKey("MovieList")]
         public int MovieListRefId { get; set; }

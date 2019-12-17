@@ -34,41 +34,6 @@ namespace movie_project.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        // GET: api/values
-        //[HttpGet]
-        //public async Task<QueryResultResource<MovieListResource>> GetAllAsync([FromQuery] MovieListsQueryResource query)
-        //{
-        //    var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    query.ApplicationUserRefId = userId;
-        //    var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
-
-        //    var queryResult = await _movieListService.ListAsync(movieListsQuery);
-        //    var resources = _mapper.Map<QueryResult<MovieList>, QueryResultResource<MovieListResource>>(queryResult);
-
-        //    return resources;
-        //}
-
-        // GET api/5
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> Get(int id)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState.GetErrorMessages());
-
-        //    var query = new MovieListsQueryResource(); // could potentially make these 4 lines a function
-        //    var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    query.ApplicationUserRefId = userId;
-        //    var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
-
-        //    var result = await _movieListService.ListAsync(id, movieListsQuery);
-
-        //    if (!result.Success)
-        //        return BadRequest(result.Message);
-
-        //    var movieListResource = _mapper.Map<MovieList, MovieListResource>(result.MovieList);
-        //    return Ok(movieListResource);
-        //}
-
         // POST api/values
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody]SaveMovieResource resource)
@@ -90,28 +55,6 @@ namespace movie_project.Controllers
             var movieResource = _mapper.Map<Movie, MovieResource>(result.Movie);
             return Ok(movieResource);
         }
-
-        // PUT api/values/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutAsync(int id, [FromBody] SaveMovieListResource resource)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState.GetErrorMessages());
-
-        //    var query = new MovieListsQueryResource();
-        //    var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    query.ApplicationUserRefId = userId;
-        //    var movieListsQuery = _mapper.Map<MovieListsQueryResource, MovieListsQuery>(query);
-
-        //    var movieList = _mapper.Map<SaveMovieListResource, MovieList>(resource);
-        //    var result = await _movieListService.UpdateAsync(id, movieList, movieListsQuery);
-
-        //    if (!result.Success)
-        //        return BadRequest(result.Message);
-
-        //    var movieListResource = _mapper.Map<MovieList, MovieListResource>(result.MovieList);
-        //    return Ok(movieListResource);
-        //}
 
         // DELETE api/values/5
         [HttpDelete("{listId}/{imdbID}")] // the list id, the resource has the imdb id

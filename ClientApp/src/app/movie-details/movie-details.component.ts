@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitterService } from '../event-emitter.service';
+import { AddMovieToMovieListModalComponent } from '../add-movie-to-movie-list-modal';
 
 @Component({
   selector: 'app-movie-details',
@@ -14,18 +15,38 @@ export class MovieDetailsComponent implements OnInit {
   private omdbMovie: Movie;
   private tmdbMovieFind: TMDBMovieFind;
   private tmdbMovie: TMDBMovie;
+  private found: boolean;
+  private receivedChildId: string;
 
   constructor(private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string, 
     private route: ActivatedRoute, 
     private router: Router,
-    private eventEmitterService: EventEmitterService) { }
+    private eventEmitterService: EventEmitterService) {
+      this.found = true;
+     }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
       this.imdbID = params['id'];
 
-      this.http.get<Movie>("https://www.omdbapi.com/", {
+      if (this.imdbID == "undefined") {
+        this.found = false;
+      }
+      else {
+        this.getOMDBListing();
+        this.getTMDBListing();
+      }
+      
+    });
+  }
+
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
+  }
+
+  getOMDBListing() {
+    this.http.get<Movie>("https://www.omdbapi.com/", {
         params: {
           apikey: "281cdd33",
           i: this.imdbID,
@@ -35,8 +56,10 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe(result => {
         this.omdbMovie = result;
       }, error => console.error(error));
+  }
 
-      this.http.get<TMDBMovieFind>(`https://api.themoviedb.org/3/find/${this.imdbID}`, {
+  getTMDBListing() {
+    this.http.get<TMDBMovieFind>(`https://api.themoviedb.org/3/find/${this.imdbID}`, {
         params: {
           api_key: "f28df3fec9ce98f371cc2a6636044a45",
           external_source: "imdb_id"
@@ -45,25 +68,26 @@ export class MovieDetailsComponent implements OnInit {
         this.tmdbMovieFind = result;
         this.tmdbMovie = this.tmdbMovieFind.movie_results[0] || null;
       }, error => console.error(error));
-    });
   }
 
-  ngOnDestroy() {
-    this.routeSub.unsubscribe();
+  addMovieToMovieList(id: string) {
+    this.http.post<MoviePost>(this.baseUrl + 'movie', {
+      Name: this.omdbMovie.Title,
+      imdbID: this.omdbMovie.imdbID,
+      MovieListRefId: parseInt(id),
+      PosterURL: this.tmdbMovie.poster_path
+    })
+  .subscribe(result => {
+    // debugger;
+      alert("added " + this.omdbMovie.Title);
+      // this.listName = "";
+      // this.router.navigateByUrl('/my-lists');
+    }, error => console.error(error));
   }
 
-  addMovieToMovieList() {
-  //   this.http.post<MoviePost>(this.baseUrl + 'movie', {
-  //     Name: this.movie.Title,
-  //     imdbID: this.movie.imdbID,
-  //     MovieListRefId: 11
-  //   })
-  // .subscribe(result => {
-  //   // debugger;
-  //     alert("added " + this.movie.Title);
-  //     // this.listName = "";
-  //     // this.router.navigateByUrl('/my-lists');
-  //   }, error => console.error(error));
+  getMessage(id: string) {
+    this.receivedChildId = id;
+    this.addMovieToMovieList(this.receivedChildId);
   }
 
 }

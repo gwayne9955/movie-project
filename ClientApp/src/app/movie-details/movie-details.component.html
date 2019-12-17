@@ -1,4 +1,5 @@
-<p *ngIf="!omdbMovie || !tmdbMovie"><em>Loading...</em></p>
+<p *ngIf="(!omdbMovie || !tmdbMovie) && found"><em>Loading...</em></p>
+<p *ngIf="!found"><em>We could not find any imdb information about this title</em></p>
 
 <div *ngIf="omdbMovie && tmdbMovie">
     <h1 id="tableLabel">{{ omdbMovie.Title }}</h1>
@@ -7,8 +8,7 @@
     <div>
         <button (click)="addMovieToMovieList()"> Add movie to movie list </button> 
     </div>
-    <!-- <div>
-        <button (click)="deleteMovieList()"> Delete Movie List </button>
-    </div> -->
+
+    <app-add-movie-to-movie-list-modal (listIdToAddTo)="getMessage($event)"></app-add-movie-to-movie-list-modal>
 
 </div>

@@ -1,6 +1,10 @@
 .card-block {
     text-align: center;
 }
+
+.card-body {
+    height: 535px;
+}
   
 .btn {
     margin-bottom: 20px;
