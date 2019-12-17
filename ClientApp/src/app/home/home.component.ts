@@ -5,10 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
   private tmdbResponse: TMDBResponse;
   private omdbResponse: MovieSearchResult;
+  private newArray;
 
   constructor(private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string, 
@@ -25,6 +27,12 @@ export class HomeComponent {
         }})
       .subscribe(result => {
         this.tmdbResponse = result;
+        var k = 3;
+        this.newArray = [];
+        for (let i = 0; i < this.tmdbResponse.results.length; i += k) {
+
+          this.newArray.push({ items: this.tmdbResponse.results.slice(i, i + k) });
+        }
       }, error => console.error(error));
   }
 
