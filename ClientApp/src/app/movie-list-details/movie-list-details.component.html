@@ -1,6 +1,6 @@
 <p *ngIf="!movieList"><em>Loading...</em></p>
 
-<div *ngIf="movieList">
+<div *ngIf="movieList" class="container">
     <h1 id="buttonslabel">{{ movieList.name }}</h1>
     <div>
         <input [(ngModel)]="movieListEditName">

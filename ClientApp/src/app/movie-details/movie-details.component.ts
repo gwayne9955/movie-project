@@ -26,7 +26,8 @@ export class MovieDetailsComponent implements OnInit {
         params: {
           apikey: "281cdd33",
           i: this.imdbID,
-          plot: "full"
+          plot: "full",
+          tomatoes: "true"
         }})
       .subscribe(result => {
         this.movie = result;
@@ -39,17 +40,17 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   addMovieToMovieList() {
-    this.http.post<MoviePost>(this.baseUrl + 'movie', {
-      Name: this.movie.Title,
-      imdbID: this.movie.imdbID,
-      MovieListRefId: 11
-    })
-  .subscribe(result => {
-    // debugger;
-      alert("added " + this.movie.Title);
-      // this.listName = "";
-      // this.router.navigateByUrl('/my-lists');
-    }, error => console.error(error));
+  //   this.http.post<MoviePost>(this.baseUrl + 'movie', {
+  //     Name: this.movie.Title,
+  //     imdbID: this.movie.imdbID,
+  //     MovieListRefId: 11
+  //   })
+  // .subscribe(result => {
+  //   // debugger;
+  //     alert("added " + this.movie.Title);
+  //     // this.listName = "";
+  //     // this.router.navigateByUrl('/my-lists');
+  //   }, error => console.error(error));
   }
 
 }
