@@ -18,7 +18,7 @@
           <ng-container *ngFor="let movieListing of row?.items">
             <div class="card mb-4 box-shadow full-height" [routerLink]="['/movie', movieListing.imdbID]">
               <div class="card-body d-flex flex-column">
-                <div class="my-auto">
+                <div class="my-auto text-center">
                   <ul class="list-unstyled mt-3 mb-4 my-auto">
                     <img src='https://image.tmdb.org/t/p/w200/{{movieListing.posterURL}}'>
                   </ul>
