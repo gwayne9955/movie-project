@@ -5,10 +5,7 @@
     <h1 id="tableLabel">{{ omdbMovie.Title }}</h1>
     <img *ngIf="tmdbMovie.poster_path" src='https://image.tmdb.org/t/p/w300/{{tmdbMovie.poster_path}}'>
     <img *ngIf="!tmdbMovie.poster_path" src='https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png'>
-    <div>
-        <button (click)="addMovieToMovieList()"> Add movie to movie list </button> 
-    </div>
 
-    <app-add-movie-to-movie-list-modal (listIdToAddTo)="getMessage($event)"></app-add-movie-to-movie-list-modal>
+    <app-add-movie-to-movie-list-modal *ngIf="(isAuthenticated | async)" (listIdToAddTo)="getMessage($event)"></app-add-movie-to-movie-list-modal>
 
 </div>

@@ -18,6 +18,7 @@ import { MovieSearchComponent } from './movie-search/movie-search.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { AddMovieToMovieListModalComponent } from './add-movie-to-movie-list-modal/add-movie-to-movie-list-modal.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditMovieListNameModalComponent } from './edit-movie-list-name-modal/edit-movie-list-name-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,9 +30,13 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     MovieListDetailsComponent,
     MovieSearchComponent,
     MovieDetailsComponent,
-    AddMovieToMovieListModalComponent
+    AddMovieToMovieListModalComponent,
+    EditMovieListNameModalComponent
   ],
-  entryComponents: [AddMovieToMovieListModalComponent],
+  entryComponents: [
+    AddMovieToMovieListModalComponent,
+    EditMovieListNameModalComponent
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,

@@ -3,31 +3,32 @@
 <div *ngIf="movieList" class="container">
     <h1 id="buttonslabel">{{ movieList.name }}</h1>
     <div>
-        <input [(ngModel)]="movieListEditName">
-        <button (click)="editListName()"> Edit Movie List Name </button> 
+        <app-edit-movie-list-name-modal [receivedParentListName]="movieList.name" (listNameToEmit)="getListName($event)">
+        </app-edit-movie-list-name-modal>
     </div>
     <div>
-        <button (click)="deleteMovieList()"> Delete Movie List </button>
+        <button class="btn btn-sm btn-outline-secondary mt-auto" (click)="deleteMovieList()"> Delete Movie List </button>
     </div>
 
-    <h2 id="tableLabel">Movies in this movie list</h2>
+    <hr>
+    <h2 class="my-auto" id="tableLabel">Movies in this movie list:</h2>
 
     <div *ngIf="movieList.movies.length > 0">
       <div class="container m-t-md">
         <div class="row mg-bottom" *ngFor="let row of newArray">
           <ng-container *ngFor="let movieListing of row?.items">
-            <div class="card mb-4 box-shadow full-height" [routerLink]="['/movie', movieListing.imdbID]">
-              <div class="card-body d-flex flex-column">
+            <div class="card mb-4 box-shadow full-height">
+              <div class="card-body d-flex flex-column" [routerLink]="['/movie', movieListing.imdbID]">
                 <div class="my-auto text-center">
                   <ul class="list-unstyled mt-3 mb-4 my-auto">
                     <img src='https://image.tmdb.org/t/p/w200/{{movieListing.posterURL}}'>
                   </ul>
                 </div>
-                <!-- <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for free</button> -->
               </div>
               <div class="card-footer">
-                <h6 class="my-0 font-weight-normal">{{movieListing?.name}}</h6>
-                <button (click)="deleteMovieFromList(movieListing.imdbID)">Delete</button>
+                <h6 class="movie-title my-1 font-weight-heavy" [routerLink]="['/movie', movieListing.imdbID]">{{movieListing?.name}}</h6>
+                <hr>
+                <button class="btn btn-sm btn-outline-primary mt-auto" (click)="deleteMovieFromList(movieListing.imdbID)">Delete</button>
               </div>
             </div>
           </ng-container>

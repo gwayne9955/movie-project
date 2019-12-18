@@ -15,6 +15,13 @@
 }
 
 .card {
+    margin-inline-end: 18px;
+}
+
+.card-body {
     cursor: pointer;
-    margin: auto;
+}
+
+h6.movie-title {
+    cursor: pointer;
 }

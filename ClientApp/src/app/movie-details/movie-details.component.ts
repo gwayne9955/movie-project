@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitterService } from '../event-emitter.service';
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movie-details',
@@ -16,16 +18,19 @@ export class MovieDetailsComponent implements OnInit {
   private tmdbMovie: TMDBMovie;
   private found: boolean;
   private receivedChildId: string;
+  public isAuthenticated: Observable<boolean>;
 
   constructor(private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string, 
     private route: ActivatedRoute, 
     private router: Router,
-    private eventEmitterService: EventEmitterService) {
+    private eventEmitterService: EventEmitterService,
+    private authorizeService: AuthorizeService) {
       this.found = true;
      }
 
   ngOnInit() {
+    this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.routeSub = this.route.params.subscribe(params => {
       this.imdbID = params['id'];
 

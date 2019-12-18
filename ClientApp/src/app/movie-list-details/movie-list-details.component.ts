@@ -14,6 +14,7 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
   private id: number;
   private movieList: MovieList;
   private movieListEditName: string;
+  private receivedChildListName: string;
   private movies;
   private newArray;
   private columns: number;
@@ -78,6 +79,14 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
           alert("Movie '" + result.name + "' deleted");
         }, error => console.error(error));
   }
+
+  getListName(listName: string) {
+    this.receivedChildListName = listName;
+    if (this.receivedChildListName != this.movieListEditName && this.receivedChildListName.length > 0) {
+      this.editListName();
+    }
+  }
+
 }
 
 interface Movie {

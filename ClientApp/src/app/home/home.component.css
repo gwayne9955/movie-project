@@ -16,5 +16,5 @@
 
 .card {
     cursor: pointer;
-    margin: auto;
+    margin-inline-end: 18px;
 }
