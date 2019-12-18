@@ -53,11 +53,10 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
 
   editListName() {
     this.http.put<MovieList>(this.baseUrl + 'movielist/' + this.id, {
-      Name: this.movieListEditName
+      Name: this.receivedChildListName
     })
       .subscribe(result => {
         this.movieList = result;
-        this.movieListEditName = "";
       }, error => console.error(error));
   }
 
@@ -82,7 +81,7 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
 
   getListName(listName: string) {
     this.receivedChildListName = listName;
-    if (this.receivedChildListName != this.movieListEditName && this.receivedChildListName.length > 0) {
+    if (this.receivedChildListName != this.movieList.name && this.receivedChildListName.length > 0) {
       this.editListName();
     }
   }
@@ -92,6 +91,7 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
 interface Movie {
   movieListRefID: number;
   name: string;
+  posterURL: string;
   imdbID: string;
 }
 
@@ -99,5 +99,4 @@ interface MovieList {
   movieListId: number;
   name: string;
   movies: Movie[];
-  posterURL: string;
 }

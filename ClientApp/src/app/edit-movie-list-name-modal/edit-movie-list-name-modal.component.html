@@ -8,6 +8,7 @@
     <div class="modal-body">
       <form>
         <div class="form-group">
+            <h6>New name:</h6>
             <input [(ngModel)]="editName" [ngModelOptions]="{standalone: true}">
         </div>
       </form>
@@ -17,5 +18,5 @@
     </div>
   </ng-template>
   
-  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Edit Movie List Name</button>
+  <button class="btn btn-sm btn-outline-primary my-auto mr-2" (click)="open(content)">Edit Movie List Name</button>
   

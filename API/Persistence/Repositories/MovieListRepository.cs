@@ -18,7 +18,7 @@ namespace movie_project.API.Persistence.Repositories
         {
             IQueryable<MovieList> queryable = _context.MovieLists
                                                     .Include(m => m.ApplicationUser)
-                                                    .AsNoTracking();
+                                                    .Include(m => m.Movies);
 
             // AsNoTracking tells EF Core it doesn't need to track changes on listed entities. Disabling entity
             // tracking makes the code a little faster

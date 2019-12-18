@@ -29,7 +29,7 @@ namespace movie_project.API.Services
         {
             // Here I list the query result from cache if they exist, but now the data can vary according to the category ID, page and amount of
             // items per page. I have to compose a cache to avoid returning wrong data.
-            string cacheKey = GetCacheKeyForMovieListsQuery(query);
+            //string cacheKey = GetCacheKeyForMovieListsQuery(query);
 
             //var movieLists = await _cache.GetOrCreateAsync(cacheKey, (entry) => {
             //    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);

@@ -27,7 +27,6 @@ export class MyListsComponent implements OnInit {
 
   getMovieLists() {
     this.http.get<MovieListResponse>(this.baseUrl + 'movielist').subscribe(result => {
-      // debugger;
       this.movieLists = result;
     }, error => console.error(error));
   }
@@ -39,8 +38,15 @@ interface MovieListResponse {
   totalItems: number;
 }
 
+interface Movie {
+  movieListRefID: number;
+  name: string;
+  posterURL: string;
+  imdbID: string;
+}
+
 interface MovieList {
   movieListId: number;
   name: string;
-  // Movies: 
+  movies: Movie[];
 }

@@ -5,13 +5,20 @@
     <div>
         <app-edit-movie-list-name-modal [receivedParentListName]="movieList.name" (listNameToEmit)="getListName($event)">
         </app-edit-movie-list-name-modal>
-    </div>
-    <div>
-        <button class="btn btn-sm btn-outline-secondary mt-auto" (click)="deleteMovieList()"> Delete Movie List </button>
+        <button class="btn btn-sm btn-outline-secondary my-auto mx-auto" (click)="deleteMovieList()"> Delete Movie List </button>
     </div>
 
     <hr>
-    <h2 class="my-auto" id="tableLabel">Movies in this movie list:</h2>
+    
+    <div class="form-inline">
+      <h2 class="my-auto mr-4" id="tableLabel">Movies in this movie list:</h2>
+      <div class="fa mt-3">
+        <button [routerLink]="['/search']" type="button" class="btn btn-primary btn-sm">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  
 
     <div *ngIf="movieList.movies.length > 0">
       <div class="container m-t-md">
@@ -34,6 +41,11 @@
           </ng-container>
         </div>
       </div>
-</div>
+
+    </div>
+
+  <div *ngIf="movieList.movies.length == 0">
+    <p><em>There are no movies in this movie list</em></p>
+  </div>
 
 </div>

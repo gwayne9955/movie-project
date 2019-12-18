@@ -5,14 +5,14 @@
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="movieLists">
     <thead>
       <tr>
-        <th>Id</th>
         <th>Name</th>
+        <th># of Movies</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let movieList of movieLists.items">
-        <td>{{ movieList.movieListId }}</td>
         <td><a [routerLink]="movieList.movieListId">{{ movieList.name }}</a></td>
+        <td>{{ movieList.movies.length }}</td>
       </tr>
     </tbody>
   </table>
