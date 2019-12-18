@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitterService } from '../event-emitter.service';
-import { AddMovieToMovieListModalComponent } from '../add-movie-to-movie-list-modal';
 
 @Component({
   selector: 'app-movie-details',
