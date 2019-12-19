@@ -11,23 +11,20 @@
             <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="movieLists">
                 <thead>
                   <tr>
-                    <th>Id</th>
                     <th>Name</th>
+                    <th># of Movies</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let movieList of movieLists.items">
-                    <td>{{ movieList.movieListId }}</td>
-                    <td><p (click)="selectMovieListToAddTo(movieList.movieListId)">{{ movieList.name }}</p></td>
+                    <td><p (click)="selectMovieListToAddTo(movieList.movieListId)" class="movie-list-name">{{ movieList.name }}</p></td>
+                    <td>{{ movieList.movies.length }}</td>
                   </tr>
                 </tbody>
               </table>
         </div>
       </form>
     </div>
-    <!-- <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-    </div> -->
   </ng-template>
   
   <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Movie To Movie List</button>

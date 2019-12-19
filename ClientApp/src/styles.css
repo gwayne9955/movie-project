@@ -31,3 +31,7 @@ code {
 #sticky-footer {
   flex-shrink: none;
 }
+
+.full-height {
+  height: 100%;
+}

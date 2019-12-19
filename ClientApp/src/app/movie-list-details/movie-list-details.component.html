@@ -24,7 +24,7 @@
       <div class="container m-t-md">
         <div class="row mg-bottom" *ngFor="let row of newArray">
           <ng-container *ngFor="let movieListing of row?.items">
-            <div class="card mb-4 box-shadow full-height">
+            <div class="card mb-4 box-shadow full-height mx-auto">
               <div class="card-body d-flex flex-column" [routerLink]="['/movie', movieListing.imdbID]">
                 <div class="my-auto text-center">
                   <ul class="list-unstyled mt-3 mb-4 my-auto">
