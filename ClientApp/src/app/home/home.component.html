@@ -2,20 +2,16 @@
 
 <div *ngIf="tmdbResponse">
       <div class="container m-t-md">
-        <h1 style="text-align: center;" class="mg-bottom">Welcome to the Movie Project</h1>
+        <h1 style="text-align: center;" class="mg-bottom">Welcome to The Movie Project</h1>
         <div class="row mg-bottom" *ngFor="let row of newArray">
           <ng-container *ngFor="let movieListing of row?.items">
             <div class="card mb-4 box-shadow full-height" (click)="popularMovieClick(movieListing.title, movieListing.original_title)">
               <div class="card-body d-flex flex-column">
-                <!-- <h1 class="card-title pricing-card-title">
-                  <small class="text-muted">/ {{item?.subTitle}}</small>
-                </h1> -->
                 <div class="my-auto text-center">
                   <ul class="list-unstyled mt-3 mb-4 my-auto">
                     <img src='https://image.tmdb.org/t/p/w300/{{movieListing.poster_path}}'>
                   </ul>
                 </div>
-                <!-- <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for free</button> -->
               </div>
               <div class="card-footer">
                 <h6 class="my-0 font-weight-normal">{{movieListing?.title}}</h6>
