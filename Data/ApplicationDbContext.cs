@@ -28,6 +28,9 @@ namespace movie_project.Data
             base.OnModelCreating(builder);
             builder.Entity<Movie>()
                 .HasKey(m => new { m.imdbID, m.MovieListRefId });
+
+            builder.Entity<MovieList>()
+                .HasIndex(m => new { m.ApplicationUserRefId, m.Name }).IsUnique();
         }
     }
 }

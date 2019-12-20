@@ -18,3 +18,7 @@
     cursor: pointer;
     margin-inline-end: 18px;
 }
+
+img.movie-image {
+    max-height: 450px;
+}

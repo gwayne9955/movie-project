@@ -40,3 +40,13 @@ code {
 .container.under-nav-bar {
   margin-bottom: 56px;
 }
+
+.nav-item.link-active {
+  background-color: #3295ff;
+  border-radius: 10px;
+}
+
+li.nav-item.link-active > a {
+  color: white !important;
+  
+}

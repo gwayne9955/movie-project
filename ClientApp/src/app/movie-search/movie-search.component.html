@@ -1,29 +1,27 @@
 <h1 id="tableLabel">Find a movie</h1>
-
 <div class="input-group mb-3">
-  <input id="searchInputField" autofocus [(ngModel)]="searchQueryString" (keyup)="searchQueryOnKeyUp()" type="text" class="form-control" placeholder="Captain Marvel..." aria-describedby="basic-addon2">
+   <input id="searchInputField" autofocus [(ngModel)]="searchQueryString" (keyup)="searchQueryOnKeyUp()" type="text" class="form-control" placeholder="Captain Marvel..." aria-describedby="basic-addon2">
 </div>
-
 <p *ngIf="!tmdbResponse"><em>Search Results Here...</em></p>
 <div *ngIf="tmdbResponse">
-  <div class="container m-t-md">
-    <h5 id="tableLabel">Search Results for '{{ searchQueryString }}'</h5>
-    <div class="row mg-bottom" *ngFor="let row of newArray">
-      <ng-container *ngFor="let movieListing of row?.items">
-        <div class="card mb-4 box-shadow full-height mx-auto" (click)="searchMovieClick(movieListing.title, movieListing.original_title)">
-          <div class="card-body d-flex flex-column">
-            <div class="my-auto text-center">
-              <ul class="list-unstyled mt-3 mb-4 my-auto">
-                <img *ngIf="movieListing.poster_path" src='https://image.tmdb.org/t/p/w300/{{movieListing.poster_path}}'>
-                <img *ngIf="!movieListing.poster_path" src='https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png'>
-              </ul>
+   <div class="container m-t-md">
+      <h5 id="tableLabel">Search Results for '{{ searchQueryString }}'</h5>
+      <div class="row mg-bottom" *ngFor="let row of newArray">
+         <ng-container *ngFor="let movieListing of row?.items">
+            <div class="card mb-4 box-shadow full-height mx-auto" (click)="searchMovieClick(movieListing.title, movieListing.original_title)">
+               <div class="card-body d-flex flex-column">
+                  <div class="my-auto text-center">
+                     <ul class="list-unstyled mt-3 mb-4 my-auto">
+                        <img class="movie-image" *ngIf="movieListing.poster_path" src='https://image.tmdb.org/t/p/w300/{{movieListing.poster_path}}'>
+                        <img class="movie-image" *ngIf="!movieListing.poster_path" src='https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png'>
+                     </ul>
+                  </div>
+               </div>
+               <div class="card-footer">
+                  <h6 class="my-0 font-weight-normal">{{movieListing?.title}}</h6>
+               </div>
             </div>
-          </div>
-          <div class="card-footer">
-            <h6 class="my-0 font-weight-normal">{{movieListing?.title}}</h6>
-          </div>
-        </div>
-      </ng-container>
-    </div>
-  </div>
+         </ng-container>
+      </div>
+   </div>
 </div>
