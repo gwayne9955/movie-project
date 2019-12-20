@@ -30,8 +30,13 @@ code {
 
 #sticky-footer {
   flex-shrink: none;
+  height: 56px;
 }
 
 .full-height {
   height: 100%;
+}
+
+.container.under-nav-bar {
+  margin-bottom: 56px;
 }

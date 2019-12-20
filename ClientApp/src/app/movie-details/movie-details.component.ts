@@ -19,6 +19,8 @@ export class MovieDetailsComponent implements OnInit {
   private found: boolean;
   private receivedChildId: string;
   public isAuthenticated: Observable<boolean>;
+  public rottenTomatoRating: string;
+  public rating: string;
 
   constructor(private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string, 
@@ -27,6 +29,7 @@ export class MovieDetailsComponent implements OnInit {
     private eventEmitterService: EventEmitterService,
     private authorizeService: AuthorizeService) {
       this.found = true;
+      this.rottenTomatoRating = "";
      }
 
   ngOnInit() {
@@ -58,7 +61,18 @@ export class MovieDetailsComponent implements OnInit {
           tomatoes: "true"
         }})
       .subscribe(result => {
+        // debugger;
         this.omdbMovie = result;
+        if (this.omdbMovie.Ratings.length > 0) {
+          if (this.omdbMovie.Ratings.length > 1 && this.omdbMovie.Ratings[1].Source == "Rotten Tomatoes") {
+            this.getRottenTomatoRating(this.omdbMovie.Ratings[1].Value);
+            this.rating = this.omdbMovie.Ratings[1].Value;
+          }
+          else {
+            this.rating = this.omdbMovie.Ratings[0].Value;
+          }
+        }
+        
       }, error => console.error(error));
   }
 
@@ -82,11 +96,21 @@ export class MovieDetailsComponent implements OnInit {
       PosterURL: this.tmdbMovie.poster_path
     })
   .subscribe(result => {
-    // debugger;
       alert("added " + this.omdbMovie.Title);
-      // this.listName = "";
-      // this.router.navigateByUrl('/my-lists');
     }, error => console.error(error));
+  }
+
+  getRottenTomatoRating(value: string) {
+    var percentage = parseInt(value.substring(0, value.length - 1));
+    if (percentage < 60 && percentage > 0) {
+      this.rottenTomatoRating = "splat";
+    }
+    else if (percentage < 75) {
+      this.rottenTomatoRating = "fresh";
+    } 
+    else {
+      this.rottenTomatoRating = "certified";
+    }
   }
 
   getMessage(id: string) {

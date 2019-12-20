@@ -1,0 +1,16 @@
+img.rotten-rating {
+    max-height: 26px;
+}
+
+.rotten-rating {
+    display: inline-block;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+#movie-info {
+    height: 26px;
+}

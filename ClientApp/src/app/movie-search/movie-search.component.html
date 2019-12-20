@@ -4,10 +4,10 @@
   <input id="searchInputField" autofocus [(ngModel)]="searchQueryString" (keyup)="searchQueryOnKeyUp()" type="text" class="form-control" placeholder="Captain Marvel..." aria-describedby="basic-addon2">
 </div>
 
-<p *ngIf="!movieSearchResult"><em>Search Results Here...</em></p>
+<p *ngIf="!tmdbResponse"><em>Search Results Here...</em></p>
 <div *ngIf="tmdbResponse">
   <div class="container m-t-md">
-    <h3 id="tableLabel">Search Results for '{{ searchQueryString }}'</h3>
+    <h5 id="tableLabel">Search Results for '{{ searchQueryString }}'</h5>
     <div class="row mg-bottom" *ngFor="let row of newArray">
       <ng-container *ngFor="let movieListing of row?.items">
         <div class="card mb-4 box-shadow full-height mx-auto" (click)="searchMovieClick(movieListing.title, movieListing.original_title)">
