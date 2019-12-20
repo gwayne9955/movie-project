@@ -11,7 +11,7 @@ import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { AddMovieListComponent } from './add-movie-list/add-movie-list.component';
-import { MyListsComponent } from './my-lists/my-lists.component';
+import { MyListsComponent, PagesPipe } from './my-lists/my-lists.component';
 import { MovieListDetailsComponent } from './movie-list-details/movie-list-details.component';
 import { EventEmitterService } from './event-emitter.service';
 import { MovieSearchComponent } from './movie-search/movie-search.component';
@@ -31,7 +31,8 @@ import { EditMovieListNameModalComponent } from './edit-movie-list-name-modal/ed
     MovieSearchComponent,
     MovieDetailsComponent,
     AddMovieToMovieListModalComponent,
-    EditMovieListNameModalComponent
+    EditMovieListNameModalComponent,
+    PagesPipe
   ],
   entryComponents: [
     AddMovieToMovieListModalComponent,
@@ -55,7 +56,8 @@ import { EditMovieListNameModalComponent } from './edit-movie-list-name-modal/ed
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
-    EventEmitterService
+    EventEmitterService,
+    PagesPipe
   ],
   bootstrap: [AppComponent]
 })
