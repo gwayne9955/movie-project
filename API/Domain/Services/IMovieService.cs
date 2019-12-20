@@ -9,6 +9,7 @@ namespace movie_project.API.Domain.Services
     public interface IMovieService
     {
         Task<MovieResponse> SaveAsync(Movie movie, MoviesQuery query);
+        Task<MovieResponse> UpdateAsync(int id, Movie movie, MoviesQuery query, string imdbID);
         Task<MovieResponse> DeleteAsync(int id, MoviesQuery query, string imdbID);
     }
 }

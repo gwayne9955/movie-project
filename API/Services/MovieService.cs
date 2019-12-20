@@ -25,44 +25,6 @@ namespace movie_project.API.Services
             _cache = cache;
         }
 
-        //public async Task<QueryResult<Movie>> ListAsync(MoviesQuery query)
-        //{
-        //    // Here I list the query result from cache if they exist, but now the data can vary according to the category ID, page and amount of
-        //    // items per page. I have to compose a cache to avoid returning wrong data.
-        //    string cacheKey = GetCacheKeyForMovieListsQuery(query);
-
-        //    //var movieLists = await _cache.GetOrCreateAsync(cacheKey, (entry) => {
-        //    //    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
-        //    //    return _movieListRepository.ListAsync(query);
-        //    //});
-
-        //    var movieLists = await _movieRepository.ListAsync(query);
-
-        //    return movieLists;
-        //}
-
-        //public async Task<MovieResponse> ListAsync(int id, MoviesQuery query)
-        //{
-        //    // Here I list the query result from cache if they exist, but now the data can vary according to the category ID, page and amount of
-        //    // items per page. I have to compose a cache to avoid returning wrong data.
-        //    //string cacheKey = GetCacheKeyForMovieListsQuery(query);
-
-        //    //var movieList = await _cache.GetOrCreateAsync(cacheKey, (entry) => {
-        //    //    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
-        //    //    return _movieListRepository.FindByIdAsync(id);
-        //    //});
-
-
-        //    //return movieList;
-
-        //    var existingMovieList = await _movieRepository.FindByIdAsync(id);
-
-        //    if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId.Equals(query.ApplicationUserRefId)))
-        //        return new MovieResponse("Movie not found.");
-
-        //    return new MovieListResponse(existingMovieList);
-        //}
-
         public async Task<MovieResponse> SaveAsync(Movie movie, MoviesQuery query)
         {
             var existingMovieList = await _movieListRepository.FindByIdAsync(movie.MovieListRefId);
@@ -84,28 +46,29 @@ namespace movie_project.API.Services
             }
         }
 
-        //public async Task<MovieListResponse> UpdateAsync(int id, MovieList movieList, MoviesQuery query)
-        //{
-        //    var existingMovieList = await _movieRepository.FindByIdAsync(id);
+        public async Task<MovieResponse> UpdateAsync(int id, Movie movie, MoviesQuery query, string imdbID)
+        {
+            var existingMovieList = await _movieListRepository.FindByIdAsync(id);
+            var existingMovie = await _movieRepository.FindByIdAsync(id, imdbID);
 
-        //    if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId.Equals(query.ApplicationUserRefId)))
-        //        return new MovieListResponse("MovieList not found.");
+            if (existingMovie == null || existingMovieList == null || !(existingMovieList.ApplicationUserRefId.Equals(query.ApplicationUserRefId)))
+                return new MovieResponse("Movie not found.");
 
-        //    existingMovieList.Name = movieList.Name;
+            existingMovie.Watched = movie.Watched;
 
-        //    try
-        //    {
-        //        _movieRepository.Update(existingMovieList);
-        //        await _unitOfWork.CompleteAsync();
+            try
+            {
+                _movieRepository.Update(existingMovie);
+                await _unitOfWork.CompleteAsync();
 
-        //        return new MovieListResponse(existingMovieList);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Do some logging stuff
-        //        return new MovieListResponse($"An error occurred when updating the movie list: {ex.Message}");
-        //    }
-        //}
+                return new MovieResponse(existingMovie);
+            }
+            catch (Exception ex)
+            {
+                // Do some logging stuff
+                return new MovieResponse($"An error occurred when updating the movie: {ex.Message}");
+            }
+        }
 
         public async Task<MovieResponse> DeleteAsync(int id, MoviesQuery query, string imdbID)
         {

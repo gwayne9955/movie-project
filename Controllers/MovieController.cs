@@ -56,6 +56,28 @@ namespace movie_project.Controllers
             return Ok(movieResource);
         }
 
+        // PUT api/values/5
+        [HttpPut("{listId}/{imdbID}")] // the list id, the resource has the imdb id
+        public async Task<IActionResult> PostAsync(int listId, string imdbID, [FromBody]SaveMovieResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var query = new MoviesQueryResource();
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            query.ApplicationUserRefId = userId;
+            var moviesQuery = _mapper.Map<MoviesQueryResource, MoviesQuery>(query);
+
+            var movie = _mapper.Map<SaveMovieResource, Movie>(resource);
+            var result = await _movieService.UpdateAsync(listId, movie, moviesQuery, imdbID);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var movieListResource = _mapper.Map<Movie, MovieResource>(result.Movie);
+            return Ok(movieListResource);
+        }
+
         // DELETE api/values/5
         [HttpDelete("{listId}/{imdbID}")] // the list id, the resource has the imdb id
         public async Task<IActionResult> DeleteAsync(int listId, string imdbID)

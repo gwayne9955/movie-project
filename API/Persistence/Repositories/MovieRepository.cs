@@ -58,10 +58,10 @@ namespace movie_project.API.Persistence.Repositories
                                  .FirstOrDefaultAsync(m => m.MovieListRefId == id); // Since Include changes the method return, we can't use FindAsync
         }
 
-        //public void Update(Movie movie)
-        //{
-        //    _context.Movies.Update(movie);
-        //}
+        public void Update(Movie movie)
+        {
+            _context.Movies.Update(movie);
+        }
 
         public void Remove(Movie movie)
         {

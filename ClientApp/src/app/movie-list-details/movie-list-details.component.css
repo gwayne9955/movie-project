@@ -25,3 +25,8 @@
 h6.movie-title {
     cursor: pointer;
 }
+
+.movie-watched {
+    background-color: rgba(245, 245, 245, 1);
+    opacity: .4;
+}

@@ -14,6 +14,8 @@ namespace movie_project.API.Resources
 
         public string PosterURL { get; set; }
 
+        public int Watched { get; set; }
+
         [Required]
         [ForeignKey("MovieList")]
         public int MovieListRefId { get; set; }

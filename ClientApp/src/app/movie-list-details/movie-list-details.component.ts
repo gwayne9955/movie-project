@@ -72,7 +72,7 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
   }
 
   deleteMovieFromList(imdbID: string) {
-    this.http.delete<MovieList>(this.baseUrl + `movie/${this.id}/${imdbID}`)
+    this.http.delete<Movie>(this.baseUrl + `movie/${this.id}/${imdbID}`)
         .subscribe(result => {
           this.getMovieList();
           alert("Movie '" + result.name + "' deleted");
@@ -86,12 +86,25 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  toggleMovieWatched(imdbID: string, beforeWatchedStatus: number) {
+    var newWatched = 1 ? beforeWatchedStatus == 0 : 0;
+    this.http.put<Movie>(this.baseUrl + `movie/${this.id}/${imdbID}`, {params: {
+      Watched: newWatched.toString()
+    }})
+        .subscribe(result => {
+          debugger;
+          this.getMovieList();
+          // alert("Movie '" + result.name + "' deleted");
+        }, error => console.error(error));
+  }
+
 }
 
 interface Movie {
   movieListRefID: number;
   name: string;
   posterURL: string;
+  watched: number;
   imdbID: string;
 }
 

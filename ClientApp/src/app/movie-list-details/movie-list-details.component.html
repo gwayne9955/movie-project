@@ -35,7 +35,13 @@
               <div class="card-footer">
                 <h6 class="movie-title my-1 font-weight-heavy" [routerLink]="['/movie', movieListing.imdbID]">{{movieListing?.name}}</h6>
                 <hr>
-                <button class="btn btn-sm btn-outline-primary mt-auto" (click)="deleteMovieFromList(movieListing.imdbID)">Delete</button>
+                <div class="row">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="watched-{{ movieListing.imdbID }}">
+                    <label class="form-check-label" for="watched-{{ movieListing.imdbID }}">Watched</label>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary mt-auto" (click)="deleteMovieFromList(movieListing.imdbID)">Delete</ button>
+                </div>
               </div>
             </div>
           </ng-container>

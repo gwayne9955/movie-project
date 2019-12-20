@@ -19,6 +19,9 @@ namespace movie_project.Models
         [Column(TypeName = "varchar(255)")]
         public string PosterURL { get; set; }
 
+        [Column(TypeName = "BIT(1)")]
+        public int Watched { get; set; }
+
         //[Key]
         [Required]
         [Column(Order = 1)]

@@ -52,6 +52,8 @@ export class MyListsComponent implements OnInit {
 
 }
 
+
+
 @Pipe({name: 'pages'})
 export class PagesPipe implements PipeTransform {
   transform(value: number, itemsPerPage: number): any {
