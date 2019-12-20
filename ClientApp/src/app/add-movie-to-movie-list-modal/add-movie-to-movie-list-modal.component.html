@@ -1,31 +1,32 @@
 <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Which movie list?</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form>
-        <div class="form-group">
-            <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="movieLists">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th># of Movies</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let movieList of movieLists.items">
-                    <td><p (click)="selectMovieListToAddTo(movieList.movieListId)" class="movie-list-name">{{ movieList.name }}</p></td>
-                    <td>{{ movieList.movies.length }}</td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>
-      </form>
-    </div>
-  </ng-template>
-  
-  <button class="btn btn-sm btn-outline-primary" (click)="open(content)">Add Movie To Movie List</button>
-  
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Which movie list?</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <table class='table table-striped table-hover' aria-labelledby="tableLabel" *ngIf="movieLists">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th># of Movies</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let movieList of movieLists.items" class="movie-list-name">
+              <td>
+                <p (click)="selectMovieListToAddTo(movieList.movieListId)">{{ movieList.name }}</p>
+              </td>
+              <td>{{ movieList.movies.length }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<button class="btn btn-sm btn-outline-primary" (click)="open(content)">Add Movie To Movie List</button>

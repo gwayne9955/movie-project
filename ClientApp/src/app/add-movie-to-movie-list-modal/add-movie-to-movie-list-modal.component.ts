@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -13,7 +13,7 @@ export class AddMovieToMovieListModalComponent implements OnInit {
   @Output() listIdToAddTo = new EventEmitter<string>();
 
   constructor(private modalService: NgbModal,
-    private http: HttpClient, 
+    private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string) { }
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class AddMovieToMovieListModalComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', scrollable: true }).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', scrollable: true }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -34,12 +34,17 @@ export class AddMovieToMovieListModalComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
   getMovieLists() {
-    this.http.get<MovieListResponse>(this.baseUrl + 'movielist').subscribe(result => {
+    this.http.get<MovieListResponse>(this.baseUrl + 'movielist', {
+      params: {
+        Page: "1",
+        ItemsPerPage: "100000"
+      }
+    }).subscribe(result => {
       this.movieLists = result;
     }, error => console.error(error));
   }
@@ -48,18 +53,4 @@ export class AddMovieToMovieListModalComponent implements OnInit {
     this.listIdToAddTo.emit(id);
   }
 
-
-}
-
-
-
-interface MovieListResponse {
-  items: MovieList[];
-  totalItems: number;
-}
-
-interface MovieList {
-  movieListId: number;
-  name: string;
-  // Movies: 
 }

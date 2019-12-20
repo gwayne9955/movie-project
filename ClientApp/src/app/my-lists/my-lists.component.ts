@@ -13,9 +13,9 @@ export class MyListsComponent implements OnInit {
   private movieLists: MovieListResponse;
   private itemsPerPage: number;
   private currentPage: number;
-  private maxPage: number; 
+  private maxPage: number;
 
-  constructor(private http: HttpClient, 
+  constructor(private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
     private route: ActivatedRoute) {
     this.itemsPerPage = 10;
@@ -24,18 +24,20 @@ export class MyListsComponent implements OnInit {
 
   ngOnInit() {
     this.routeSub = this.route
-    .queryParams
-    .subscribe(params => {
-      this.currentPage = parseInt(params['page'] || "1");
-      this.getMovieLists(this.currentPage.toString());
-    });
+      .queryParams
+      .subscribe(params => {
+        this.currentPage = parseInt(params['page'] || "1");
+        this.getMovieLists(this.currentPage.toString());
+      });
   }
 
   getMovieLists(pageNumber: string) {
-    this.http.get<MovieListResponse>(this.baseUrl + 'movielist', {params: {
-      Page: pageNumber,
-      ItemsPerPage: this.itemsPerPage.toString()
-    }}).subscribe(result => {
+    this.http.get<MovieListResponse>(this.baseUrl + 'movielist', {
+      params: {
+        Page: pageNumber,
+        ItemsPerPage: this.itemsPerPage.toString()
+      }
+    }).subscribe(result => {
       this.movieLists = result;
       this.maxPage = this.getMaxPage(this.movieLists.totalItems, this.itemsPerPage);
     }, error => console.error(error));
@@ -52,9 +54,7 @@ export class MyListsComponent implements OnInit {
 
 }
 
-
-
-@Pipe({name: 'pages'})
+@Pipe({ name: 'pages' })
 export class PagesPipe implements PipeTransform {
   transform(value: number, itemsPerPage: number): any {
     const arr = [];
@@ -65,22 +65,4 @@ export class PagesPipe implements PipeTransform {
     }
     return arr;
   }
-}
-
-interface MovieListResponse {
-  items: MovieList[];
-  totalItems: number;
-}
-
-interface Movie {
-  movieListRefID: number;
-  name: string;
-  posterURL: string;
-  imdbID: string;
-}
-
-interface MovieList {
-  movieListId: number;
-  name: string;
-  movies: Movie[];
 }

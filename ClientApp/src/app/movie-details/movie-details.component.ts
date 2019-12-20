@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class MovieDetailsComponent implements OnInit {
   private routeSub;
   private imdbID: string;
-  private omdbMovie: Movie;
+  private omdbMovie: OMDBMovie;
   private tmdbMovieFind: TMDBMovieFind;
   private tmdbMovie: TMDBMovie;
   private found: boolean;
@@ -22,15 +22,15 @@ export class MovieDetailsComponent implements OnInit {
   public rottenTomatoRating: string;
   public rating: string;
 
-  constructor(private http: HttpClient, 
-    @Inject('BASE_URL') private baseUrl: string, 
-    private route: ActivatedRoute, 
+  constructor(private http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string,
+    private route: ActivatedRoute,
     private router: Router,
     private eventEmitterService: EventEmitterService,
     private authorizeService: AuthorizeService) {
-      this.found = true;
-      this.rottenTomatoRating = "";
-     }
+    this.found = true;
+    this.rottenTomatoRating = "";
+  }
 
   ngOnInit() {
     this.isAuthenticated = this.authorizeService.isAuthenticated();
@@ -44,7 +44,7 @@ export class MovieDetailsComponent implements OnInit {
         this.getOMDBListing();
         this.getTMDBListing();
       }
-      
+
     });
   }
 
@@ -53,13 +53,14 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getOMDBListing() {
-    this.http.get<Movie>("https://www.omdbapi.com/", {
-        params: {
-          apikey: "281cdd33",
-          i: this.imdbID,
-          plot: "full",
-          tomatoes: "true"
-        }})
+    this.http.get<OMDBMovie>("https://www.omdbapi.com/", {
+      params: {
+        apikey: "281cdd33",
+        i: this.imdbID,
+        plot: "full",
+        tomatoes: "true"
+      }
+    })
       .subscribe(result => {
         // debugger;
         this.omdbMovie = result;
@@ -72,16 +73,17 @@ export class MovieDetailsComponent implements OnInit {
             this.rating = this.omdbMovie.Ratings[0].Value;
           }
         }
-        
+
       }, error => console.error(error));
   }
 
   getTMDBListing() {
     this.http.get<TMDBMovieFind>(`https://api.themoviedb.org/3/find/${this.imdbID}`, {
-        params: {
-          api_key: "f28df3fec9ce98f371cc2a6636044a45",
-          external_source: "imdb_id"
-        }})
+      params: {
+        api_key: "f28df3fec9ce98f371cc2a6636044a45",
+        external_source: "imdb_id"
+      }
+    })
       .subscribe(result => {
         this.tmdbMovieFind = result;
         this.tmdbMovie = this.tmdbMovieFind.movie_results[0] || null;
@@ -95,9 +97,9 @@ export class MovieDetailsComponent implements OnInit {
       MovieListRefId: parseInt(id),
       PosterURL: this.tmdbMovie.poster_path
     })
-  .subscribe(result => {
-      alert("added " + this.omdbMovie.Title);
-    }, error => console.error(error));
+      .subscribe(result => {
+        alert("added " + this.omdbMovie.Title);
+      }, error => console.error(error));
   }
 
   getRottenTomatoRating(value: string) {
@@ -107,7 +109,7 @@ export class MovieDetailsComponent implements OnInit {
     }
     else if (percentage < 75) {
       this.rottenTomatoRating = "fresh";
-    } 
+    }
     else {
       this.rottenTomatoRating = "certified";
     }
@@ -118,76 +120,4 @@ export class MovieDetailsComponent implements OnInit {
     this.addMovieToMovieList(this.receivedChildId);
   }
 
-}
-
-interface TMDBMovieFind {
-  movie_results: TMDBMovie[];
-  person_results: any[];
-  tv_results: any[];
-  tv_episode_results: any[];
-  tv_season_results: any[];
-}
-
-interface TMDBMovie {
-  popularity: number;
-  vote_count: number;
-  video: boolean;
-  poster_path: string;
-  id: number;
-  adult: boolean;
-  backdrop_path: string;
-  original_language: string;
-  original_title: string;
-  genre_ids: number[];
-  title: string;
-  vote_average: number;
-  overview: string;
-  release_date: string;
-}
-
-interface MoviePost {
-  Name: string;
-  imdbId: string;
-  MovieListRefId: number;
-}
-
-interface Movie {
-  Title: string;
-  Year: string;
-  Rated: string;
-  Released: string;
-  Runtime: string;
-  Genre: string;
-  Director: string;
-  Writer: string;
-  Actors: string;
-  Plot: string;
-  Language: string;
-  Country: string;
-  Awards: string;
-  Poster: string;
-  Ratings: [
-      {
-          Source: string;
-          Value: string
-      },
-      {
-          Source: string;
-          Value: string
-      },
-      {
-          Source: string;
-          Value: string
-      }
-  ];
-  Metascore: string;
-  imdbRating: string;
-  imdbVotes: string;
-  imdbID: string;
-  Type: string;
-  DVD: string;
-  BoxOffice: string;
-  Production: string;
-  Website: string;
-  Response: string;
 }

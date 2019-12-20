@@ -1,9 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthorizeService } from '../../api-authorization/authorize.service';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { MyListsComponent } from '../my-lists/my-lists.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,25 +7,21 @@ import { Router } from '@angular/router';
   templateUrl: './add-movie-list.component.html',
   styleUrls: ['./add-movie-list.component.css']
 })
-export class AddMovieListComponent implements OnInit {
+export class AddMovieListComponent {
   public listName: string;
   public ableToAdd: boolean;
 
-  constructor(private http: HttpClient, 
+  constructor(private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
     private router: Router) {
-      this.ableToAdd = false;
-    }
-
-  ngOnInit() {
-    // maybe get user-id?
+    this.ableToAdd = false;
   }
 
   addListName() {
     this.http.post<MovieList>(this.baseUrl + 'movielist', {
-        Name: this.listName
-      })
-    .subscribe(result => {
+      Name: this.listName
+    })
+      .subscribe(result => {
         alert("added " + this.listName);
         this.listName = "";
         this.router.navigateByUrl('/my-lists');
@@ -45,8 +37,4 @@ export class AddMovieListComponent implements OnInit {
     }
   }
 
-}
-
-interface MovieList {
-  name: string;
 }

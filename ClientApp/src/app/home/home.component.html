@@ -1,47 +1,27 @@
 <p *ngIf="!tmdbResponse"><em>Loading...</em></p>
 
 <div *ngIf="tmdbResponse">
-      <div class="container m-t-md">
-        <h1 class="mg-bottom text-center">Welcome to The Movie Project</h1>
-        <p class="mg-bottom text-center">Create Lists of movies that you would like to watch! Using our search and discover features, you can add movies to your saved lists</p>
-        <!-- <div class=""> -->
-          <!-- <h5>Discover: </h5>
-          <div class="dropdown">
-            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Sort Popular Movies By
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+  <div class="container m-t-md">
+    <h1 class="mg-bottom text-center">Welcome to The Movie Project</h1>
+    <p class="mg-bottom text-center">Create Lists of movies that you would like to watch! Using our search and discover
+      features, you can add movies to your saved lists</p>
+    <div class="row mg-bottom" *ngFor="let row of newArray">
+      <ng-container *ngFor="let movieListing of row?.items">
+        <div class="card mb-4 box-shadow full-height mx-auto">
+          <div class="card-body d-flex flex-column"
+            (click)="popularMovieClick(movieListing.title, movieListing.original_title)">
+            <div class="my-auto text-center">
+              <ul class="list-unstyled mt-3 mb-4 my-auto">
+                <img class="movie-image" src='https://image.tmdb.org/t/p/w300/{{movieListing.poster_path}}'>
+              </ul>
             </div>
           </div>
-
-          <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button class="dropdown-item">Action - 1</button>
-              <button class="dropdown-item">Another Action</button>
-              <button class="dropdown-item">Something else is here</button>
-            </div>
-          </div> -->
-
-        <!-- </div> -->
-        <div class="row mg-bottom" *ngFor="let row of newArray">
-          <ng-container *ngFor="let movieListing of row?.items">
-            <div class="card mb-4 box-shadow full-height mx-auto">
-              <div class="card-body d-flex flex-column" (click)="popularMovieClick(movieListing.title, movieListing.original_title)">
-                <div class="my-auto text-center">
-                  <ul class="list-unstyled mt-3 mb-4 my-auto">
-                    <img class="movie-image" src='https://image.tmdb.org/t/p/w300/{{movieListing.poster_path}}'>
-                  </ul>
-                </div>
-              </div>
-              <div class="card-footer">
-                <h6 class="my-0 font-weight-normal" (click)="popularMovieClick(movieListing.title, movieListing.original_title)">{{movieListing?.title}}</h6>
-              </div>
-            </div>
-          </ng-container>
+          <div class="card-footer">
+            <h6 class="my-0 font-weight-normal"
+              (click)="popularMovieClick(movieListing.title, movieListing.original_title)">{{movieListing?.title}}</h6>
+          </div>
         </div>
-      </div>
+      </ng-container>
+    </div>
+  </div>
 </div>

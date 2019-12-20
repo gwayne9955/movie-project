@@ -58,7 +58,7 @@ namespace movie_project.Controllers
 
         // PUT api/values/5
         [HttpPut("{listId}/{imdbID}")] // the list id, the resource has the imdb id
-        public async Task<IActionResult> PostAsync(int listId, string imdbID, [FromBody]SaveMovieResource resource)
+        public async Task<IActionResult> PostAsync(int listId, string imdbID, [FromBody]EditMovieResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
@@ -68,7 +68,7 @@ namespace movie_project.Controllers
             query.ApplicationUserRefId = userId;
             var moviesQuery = _mapper.Map<MoviesQueryResource, MoviesQuery>(query);
 
-            var movie = _mapper.Map<SaveMovieResource, Movie>(resource);
+            var movie = _mapper.Map<EditMovieResource, Movie>(resource);
             var result = await _movieService.UpdateAsync(listId, movie, moviesQuery, imdbID);
 
             if (!result.Success)

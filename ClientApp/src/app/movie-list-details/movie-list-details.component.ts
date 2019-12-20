@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { EventEmitterService } from '../event-emitter.service';   
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-movie-list-details',
@@ -19,15 +19,15 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
   private newArray;
   private columns: number;
 
-  constructor(private http: HttpClient, 
-    @Inject('BASE_URL') private baseUrl: string, 
-    private route: ActivatedRoute, 
+  constructor(private http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string,
+    private route: ActivatedRoute,
     private router: Router,
     private eventEmitterService: EventEmitterService) {
-      this.newArray = [];
-      this.columns = 4;
-      this.movies = [];
-     }
+    this.newArray = [];
+    this.columns = 4;
+    this.movies = [];
+  }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
@@ -61,8 +61,7 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
   }
 
   deleteMovieList() {
-    if (confirm("Are you sure you want to delete this movie list?"))
-    {
+    if (confirm("Are you sure you want to delete this movie list?")) {
       this.http.delete<MovieList>(this.baseUrl + 'movielist/' + this.id)
         .subscribe(result => {
           alert("MovieList '" + result.name + "' deleted");
@@ -73,10 +72,10 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
 
   deleteMovieFromList(imdbID: string) {
     this.http.delete<Movie>(this.baseUrl + `movie/${this.id}/${imdbID}`)
-        .subscribe(result => {
-          this.getMovieList();
-          alert("Movie '" + result.name + "' deleted");
-        }, error => console.error(error));
+      .subscribe(result => {
+        this.getMovieList();
+        alert("Movie '" + result.name + "' deleted");
+      }, error => console.error(error));
   }
 
   getListName(listName: string) {
@@ -87,29 +86,16 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
   }
 
   toggleMovieWatched(imdbID: string, beforeWatchedStatus: number) {
-    var newWatched = 1 ? beforeWatchedStatus == 0 : 0;
-    this.http.put<Movie>(this.baseUrl + `movie/${this.id}/${imdbID}`, {params: {
-      Watched: newWatched.toString()
-    }})
-        .subscribe(result => {
-          debugger;
-          this.getMovieList();
-          // alert("Movie '" + result.name + "' deleted");
-        }, error => console.error(error));
+    var newWatched = 1;
+    if (beforeWatchedStatus == 1) {
+      newWatched = 0;
+    }
+    this.http.put<Movie>(this.baseUrl + `movie/${this.id}/${imdbID}`, {
+      Watched: newWatched
+    })
+      .subscribe(result => {
+        this.getMovieList();
+      }, error => console.error(error));
   }
 
-}
-
-interface Movie {
-  movieListRefID: number;
-  name: string;
-  posterURL: string;
-  watched: number;
-  imdbID: string;
-}
-
-interface MovieList {
-  movieListId: number;
-  name: string;
-  movies: Movie[];
 }

@@ -12,6 +12,7 @@ namespace movie_project.API.Mapping
             CreateMap<SaveMovieListResource, MovieList>();
             CreateMap<MovieListsQueryResource, MovieListsQuery>();
             CreateMap<SaveMovieResource, Movie>();
+            CreateMap<EditMovieResource, Movie>();
             CreateMap<MoviesQueryResource, MoviesQuery>();
         }
     }

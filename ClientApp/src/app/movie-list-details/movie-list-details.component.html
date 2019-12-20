@@ -1,57 +1,56 @@
 <p *ngIf="!movieList"><em>Loading...</em></p>
 
 <div *ngIf="movieList" class="container">
-    <h1 id="buttonslabel">{{ movieList.name }}</h1>
-    <div>
-        <app-edit-movie-list-name-modal [receivedParentListName]="movieList.name" (listNameToEmit)="getListName($event)">
-        </app-edit-movie-list-name-modal>
-        <button class="btn btn-sm btn-outline-secondary my-auto mx-auto" (click)="deleteMovieList()"> Delete Movie List </button>
+  <h1 class="mb-3" id="buttonslabel">{{ movieList.name }}</h1>
+  <div>
+    <app-edit-movie-list-name-modal [receivedParentListName]="movieList.name" (listNameToEmit)="getListName($event)">
+    </app-edit-movie-list-name-modal>
+    <button class="btn btn-sm btn-outline-secondary my-auto mx-auto" (click)="deleteMovieList()"> Delete Movie List
+    </button>
+  </div>
+  <hr>
+  <div class="form-inline">
+    <h2 class="mt-auto mr-4 mb-3" id="tableLabel">Movies in this movie list:</h2>
+    <div class="fa mt-3">
+      <button [routerLink]="['/search']" type="button" class="btn btn-primary btn-sm">
+        <i class="fas fa-plus"></i>
+      </button>
     </div>
-
-    <hr>
-    
-    <div class="form-inline">
-      <h2 class="my-auto mr-4" id="tableLabel">Movies in this movie list:</h2>
-      <div class="fa mt-3">
-        <button [routerLink]="['/search']" type="button" class="btn btn-primary btn-sm">
-          <i class="fas fa-plus"></i>
-        </button>
-      </div>
-    </div>
-  
-
-    <div *ngIf="movieList.movies.length > 0">
-      <div class="container m-t-md">
-        <div class="row mg-bottom" *ngFor="let row of newArray">
-          <ng-container *ngFor="let movieListing of row?.items">
-            <div class="card mb-4 box-shadow full-height mx-auto">
-              <div class="card-body d-flex flex-column" [routerLink]="['/movie', movieListing.imdbID]">
-                <div class="my-auto text-center">
-                  <ul class="list-unstyled mt-3 mb-4 my-auto">
-                    <img src='https://image.tmdb.org/t/p/w200/{{movieListing.posterURL}}'>
-                  </ul>
-                </div>
-              </div>
-              <div class="card-footer">
-                <h6 class="movie-title my-1 font-weight-heavy" [routerLink]="['/movie', movieListing.imdbID]">{{movieListing?.name}}</h6>
-                <hr>
-                <div class="row">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="watched-{{ movieListing.imdbID }}">
-                    <label class="form-check-label" for="watched-{{ movieListing.imdbID }}">Watched</label>
-                  </div>
-                  <button class="btn btn-sm btn-outline-primary mt-auto" (click)="deleteMovieFromList(movieListing.imdbID)">Delete</ button>
-                </div>
+  </div>
+  <div *ngIf="movieList.movies.length > 0">
+    <div class="container m-t-md">
+      <div class="row mg-bottom" *ngFor="let row of newArray">
+        <ng-container *ngFor="let movieListing of row?.items">
+          <div class="card mb-4 box-shadow full-height mx-auto"
+            [ngClass]="{'movie-watched': movieListing.watched=='1'}">
+            <div class="card-body d-flex flex-column" [routerLink]="['/movie', movieListing.imdbID]">
+              <div class="my-auto text-center">
+                <ul class="list-unstyled mt-3 mb-4 my-auto">
+                  <img src='https://image.tmdb.org/t/p/w200/{{movieListing.posterURL}}'>
+                </ul>
               </div>
             </div>
-          </ng-container>
-        </div>
+            <div class="card-footer">
+              <h6 class="movie-title my-1 font-weight-heavy" [routerLink]="['/movie', movieListing.imdbID]">
+                {{movieListing?.name}}</h6>
+              <hr>
+              <div class="row">
+                <div class="form-check mx-auto">
+                  <input type="checkbox" class="form-check-input" id="watched-{{ movieListing.imdbID }}"
+                    [checked]="movieListing.watched"
+                    (change)="toggleMovieWatched(movieListing.imdbID, movieListing.watched)">
+                  <label class="form-check-label" for="watched-{{ movieListing.imdbID }}">Watched</label>
+                </div>
+                <button class="btn btn-sm btn-outline-primary mt-auto mr-auto"
+                  (click)="deleteMovieFromList(movieListing.imdbID)">Delete</ button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
       </div>
-
     </div>
-
+  </div>
   <div *ngIf="movieList.movies.length == 0">
     <p><em>There are no movies in this movie list</em></p>
   </div>
-
 </div>

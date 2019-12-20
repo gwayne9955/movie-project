@@ -6,9 +6,12 @@
          <h1 id="tableLabel">{{ omdbMovie.Title }}</h1>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center" *ngIf="omdbMovie.Ratings.length > 0">
-         <img class="rotten-rating" *ngIf="rottenTomatoRating == 'splat'" src='https://webstockreview.net/images/tomatoes-clipart-rotten-tomato-11.png'>
-         <img class="rotten-rating" *ngIf="rottenTomatoRating == 'fresh'" src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Rotten_Tomatoes.svg/1009px-Rotten_Tomatoes.svg.png'>
-         <img class="rotten-rating" *ngIf="rottenTomatoRating == 'certified'" src='https://staticv2-4.rottentomatoes.com/static/images/icons/cf-lg.png'>
+         <img class="rotten-rating" *ngIf="rottenTomatoRating == 'splat'"
+            src='https://webstockreview.net/images/tomatoes-clipart-rotten-tomato-11.png'>
+         <img class="rotten-rating" *ngIf="rottenTomatoRating == 'fresh'"
+            src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Rotten_Tomatoes.svg/1009px-Rotten_Tomatoes.svg.png'>
+         <img class="rotten-rating" *ngIf="rottenTomatoRating == 'certified'"
+            src='https://staticv2-4.rottentomatoes.com/static/images/icons/cf-lg.png'>
          <h3 class="my-0 ml-1">{{ rating }}</h3>
       </div>
    </div>
@@ -18,20 +21,23 @@
          <p class="ml-4 mb-0 px-1 border border-dark">{{ omdbMovie.Rated }}</p>
          <p class="ml-4 mb-0">{{ omdbMovie.Runtime }}</p>
          <span class="ml-4 mb-0">
-         <a href='https://www.imdb.com/title/{{omdbMovie.imdbID}}/' target="_blank">
-         <img src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png"/>
-         </a>
+            <a href='https://www.imdb.com/title/{{omdbMovie.imdbID}}/' target="_blank">
+               <img src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png" />
+            </a>
          </span>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
-         <app-add-movie-to-movie-list-modal class="" *ngIf="(isAuthenticated | async)" (listIdToAddTo)="getMessage($event)"></app-add-movie-to-movie-list-modal>
+         <app-add-movie-to-movie-list-modal class="" *ngIf="(isAuthenticated | async)"
+            (listIdToAddTo)="getMessage($event)"></app-add-movie-to-movie-list-modal>
       </div>
    </div>
    <hr>
    <div id="movieBody" class="row">
       <div class="col-4">
-         <img *ngIf="tmdbMovie.poster_path" class="img-fluid shadow p-3 mb-5 bg-white rounded" src='https://image.tmdb.org/t/p/w500/{{tmdbMovie.poster_path}}'>
-         <img *ngIf="!tmdbMovie.poster_path" src='https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png'>
+         <img *ngIf="tmdbMovie.poster_path" class="img-fluid shadow p-3 mb-5 bg-white rounded"
+            src='https://image.tmdb.org/t/p/w500/{{tmdbMovie.poster_path}}'>
+         <img *ngIf="!tmdbMovie.poster_path"
+            src='https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png'>
          <h6 class="text-center"><em>{{ omdbMovie.Genre }}</em></h6>
          <h6 class="text-center">{{ omdbMovie.Released }}</h6>
       </div>
