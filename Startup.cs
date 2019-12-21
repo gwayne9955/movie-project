@@ -15,6 +15,7 @@ using movie_project.API.Domain.Services;
 using movie_project.API.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using System.Security.Cryptography.X509Certificates;
 
 namespace movie_project
 {
@@ -30,6 +31,10 @@ namespace movie_project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            //var bytes = System.IO.File.ReadAllBytes("example.pfx");
+            //var cert = new X509Certificate2(bytes);
+
             services.AddCors();
             services.AddMemoryCache();
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -45,6 +50,8 @@ namespace movie_project
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+            //services.AddIdentityServer()
+            //    .AddSigningCredential(cert);
             services.AddControllersWithViews();
             services.AddRazorPages();
 

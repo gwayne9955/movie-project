@@ -43,7 +43,7 @@ export class HomeComponent {
         for (let i = 0; i < this.tmdbMovies.length; i += this.columns) {
           this.newArray.push({ items: this.tmdbMovies.slice(i, i + this.columns) });
         }
-      }, error => alert(error.error));
+      }, error => console.log(error));
   }
 
   popularMovieClick(title: string, originalTitle: string) {
@@ -63,7 +63,7 @@ export class HomeComponent {
         else {
           this.popularMovieSecondaryTitle(originalTitle);
         }
-      }, error => alert(error.error));
+      }, error => console.log(error));
   }
 
   popularMovieSecondaryTitle(originalTitle: string) {
@@ -76,7 +76,7 @@ export class HomeComponent {
       .subscribe(result => {
         this.omdbListing = result;
         this.router.navigateByUrl(`/movie/${this.omdbListing.imdbID}`);
-      }, error => alert(error.error));
+      }, error => console.log(error));
   }
 
   @HostListener("window:scroll", ["$event"])

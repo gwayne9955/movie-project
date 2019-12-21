@@ -50,6 +50,20 @@
     <Folder Include="API\Domain\Queries\" />
     <Folder Include="API\Infrastructure\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="ClientApp\dist\fontawesome-webfont.912ec66d7572ff821749.svg" />
+    <None Remove="ClientApp\dist\polyfills-es2015.5728f680576ca47e99fe.js" />
+    <None Remove="ClientApp\dist\index.html" />
+    <None Remove="ClientApp\dist\polyfills-es5.1fc3c7177b3068d2373b.js" />
+    <None Remove="ClientApp\dist\3rdpartylicenses.txt" />
+    <None Remove="ClientApp\dist\fontawesome-webfont.674f50d287a8c48dc19b.eot" />
+    <None Remove="ClientApp\dist\runtime-es2015.858f8dd898b75fe86926.js" />
+    <None Remove="ClientApp\dist\main-es2015.a11fd14daba4fda1605a.js" />
+    <None Remove="ClientApp\dist\runtime-es5.741402d1d47331ce975c.js" />
+    <None Remove="ClientApp\dist\main-es5.b7bd8256ff180d426acf.js" />
+    <None Remove="ClientApp\dist\styles.8fc932d7a63a98bbbff5.css" />
+    <None Remove="ClientApp\dist\fontawesome-webfont.fee66e712a8a08eef580.woff" />
+  </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
