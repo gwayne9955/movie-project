@@ -2,7 +2,7 @@
 
 /* Provide sufficient contrast against white background */
 
-* {
+*:not(i, .fa) {
   font-family: 'Nunito Sans', sans-serif;
 }
 
