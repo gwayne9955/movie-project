@@ -1,5 +1,4 @@
-﻿using System;
-using movie_project.Data;
+﻿using movie_project.Data;
 namespace movie_project.API.Persistence.Repositories
 {
     public abstract class BaseRepository

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using movie_project.Models;
 using movie_project.API.Domain.Services;
 using movie_project.API.Domain.Repositories;
-using movie_project.API.Resources;
 using movie_project.API.Domain.Services.Communication;
 using movie_project.API.Domain.Queries;
 using movie_project.API.Infrastructure;
@@ -43,18 +41,6 @@ namespace movie_project.API.Services
 
         public async Task<MovieListResponse> ListAsync(int id, MovieListsQuery query)
         {
-            // Here I list the query result from cache if they exist, but now the data can vary according to the category ID, page and amount of
-            // items per page. I have to compose a cache to avoid returning wrong data.
-            //string cacheKey = GetCacheKeyForMovieListsQuery(query);
-
-            //var movieList = await _cache.GetOrCreateAsync(cacheKey, (entry) => {
-            //    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
-            //    return _movieListRepository.FindByIdAsync(id);
-            //});
-            
-
-            //return movieList;
-
             var existingMovieList = await _movieListRepository.FindByIdAsync(id);
 
             if (existingMovieList == null || !(existingMovieList.ApplicationUserRefId.Equals(query.ApplicationUserRefId)))

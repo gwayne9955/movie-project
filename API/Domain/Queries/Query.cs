@@ -1,5 +1,4 @@
-﻿using System;
-namespace movie_project.API.Domain.Queries
+﻿namespace movie_project.API.Domain.Queries
 {
     public class Query
     {

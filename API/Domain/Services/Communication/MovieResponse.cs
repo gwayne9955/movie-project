@@ -1,5 +1,4 @@
-﻿using System;
-using movie_project.Models;
+﻿using movie_project.Models;
 
 namespace movie_project.API.Domain.Services.Communication
 {

@@ -9,7 +9,6 @@ namespace movie_project.Models
         //[Key]
         [Column(Order = 0, TypeName = "varchar(255)")]
         [Required]
-        //[Column(TypeName = "varchar(255)")]
         public string imdbID { get; set; }
 
         [Required]

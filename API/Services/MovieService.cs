@@ -5,7 +5,6 @@ using movie_project.API.Domain.Queries;
 using movie_project.API.Domain.Repositories;
 using movie_project.API.Domain.Services;
 using movie_project.API.Domain.Services.Communication;
-using movie_project.API.Infrastructure;
 using movie_project.Models;
 
 namespace movie_project.API.Services
@@ -91,18 +90,5 @@ namespace movie_project.API.Services
                 return new MovieResponse($"An error occurred when deleting the movie: {ex.Message}");
             }
         }
-
-        //private string GetCacheKeyForMovieListsQuery(MoviesQuery query)
-        //{
-        //    string key = CacheKeys.MovieListsList.ToString();
-
-        //    if (query.ApplicationUserRefId != null && query.ApplicationUserRefId.Length > 0)
-        //    {
-        //        key = string.Concat(key, "_", query.ApplicationUserRefId);
-        //    }
-
-        //    key = string.Concat(key, "_", query.Page, "_", query.ItemsPerPage);
-        //    return key;
-        //}
     }
 }

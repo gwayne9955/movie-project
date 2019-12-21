@@ -1,5 +1,4 @@
-﻿using System;
-namespace movie_project.API.Resources
+﻿namespace movie_project.API.Resources
 {
     public class MovieResource
     {

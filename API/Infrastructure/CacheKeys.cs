@@ -1,5 +1,4 @@
-﻿using System;
-namespace movie_project.API.Infrastructure
+﻿namespace movie_project.API.Infrastructure
 {
 	public enum CacheKeys
 	{

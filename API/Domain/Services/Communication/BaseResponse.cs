@@ -1,5 +1,4 @@
-﻿using System;
-namespace movie_project.API.Domain.Services.Communication
+﻿namespace movie_project.API.Domain.Services.Communication
 {
     public abstract class BaseResponse
     {

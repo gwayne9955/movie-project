@@ -5,7 +5,7 @@ namespace movie_project.API.Domain.Queries
     {
         public string? ApplicationUserRefId { get; set; }
 
-        public MoviesQuery(string? applicationUserRefId) : base(1, 1000)
+        public MoviesQuery(string? applicationUserRefId) : base(1, 100000)
         {
             ApplicationUserRefId = applicationUserRefId;
         }

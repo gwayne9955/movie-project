@@ -1,6 +1,4 @@
-﻿using System;
-using movie_project.Models;
-using System.Collections.Generic;
+﻿using movie_project.Models;
 using System.Threading.Tasks;
 using movie_project.API.Domain.Services.Communication;
 using movie_project.API.Domain.Queries;
