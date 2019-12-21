@@ -73,7 +73,7 @@ export class MovieDetailsComponent implements OnInit {
           }
         }
 
-      }, error => alert(error.error));
+      }, error => console.log(error));
   }
 
   getTMDBListing() {
@@ -86,7 +86,7 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe(result => {
         this.tmdbMovieFind = result;
         this.tmdbMovie = this.tmdbMovieFind.movie_results[0] || null;
-      }, error => alert(error.error));
+      }, error => console.log(error));
   }
 
   addMovieToMovieList(id: string) {
@@ -98,7 +98,7 @@ export class MovieDetailsComponent implements OnInit {
     })
       .subscribe(result => {
         alert("added " + this.omdbMovie.Title);
-      }, error => alert(error.error));
+      }, error => console.log(error));
   }
 
   getRottenTomatoRating(value: string) {
