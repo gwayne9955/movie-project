@@ -7,8 +7,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./edit-movie-list-name-modal.component.css']
 })
 export class EditMovieListNameModalComponent implements OnInit {
-  private closeResult: string;
-  private editName: string;
+  public closeResult: string;
+  public editName: string;
   @Input() receivedParentListName: string;
   @Output() listNameToEmit = new EventEmitter<string>();
 

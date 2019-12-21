@@ -8,14 +8,14 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./movie-search.component.css']
 })
 export class MovieSearchComponent implements OnInit {
-  private routeSub;
-  private searchQueryString: string;
-  private tmdbResponse: TMDBResponse;
-  private tmdbMovies;
-  private omdbListing: OMDBMovieSearchTitle;
-  private newArray;
-  private pageNum: number;
-  private columns: number;
+  public routeSub;
+  public searchQueryString: string;
+  public tmdbResponse: TMDBResponse;
+  public tmdbMovies;
+  public omdbListing: OMDBMovieSearchTitle;
+  public newArray;
+  public pageNum: number;
+  public columns: number;
 
   constructor(private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,

@@ -10,14 +10,14 @@ import { EventEmitterService } from '../event-emitter.service';
   styleUrls: ['./movie-list-details.component.css']
 })
 export class MovieListDetailsComponent implements OnInit, OnDestroy {
-  private routeSub;
-  private id: number;
-  private movieList: MovieList;
-  private movieListEditName: string;
-  private receivedChildListName: string;
-  private movies;
-  private newArray;
-  private columns: number;
+  public routeSub;
+  public id: number;
+  public movieList: MovieList;
+  public movieListEditName: string;
+  public receivedChildListName: string;
+  public movies;
+  public newArray;
+  public columns: number;
 
   constructor(private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,

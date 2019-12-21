@@ -8,12 +8,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  private tmdbResponse: TMDBResponse;
-  private tmdbMovies;
-  private omdbListing: OMDBMovieSearchTitle;
-  private newArray;
-  private pageNum: number;
-  private columns: number;
+  public tmdbResponse: TMDBResponse;
+  public tmdbMovies;
+  public omdbListing: OMDBMovieSearchTitle;
+  public newArray;
+  public pageNum: number;
+  public columns: number;
 
   constructor(private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,

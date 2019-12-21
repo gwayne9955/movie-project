@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./add-movie-to-movie-list-modal.component.css']
 })
 export class AddMovieToMovieListModalComponent implements OnInit {
-  private closeResult: string;
+  public closeResult: string;
   public movieLists: MovieListResponse;
   @Output() listIdToAddTo = new EventEmitter<string>();
 

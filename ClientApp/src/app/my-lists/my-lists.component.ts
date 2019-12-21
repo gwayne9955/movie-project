@@ -9,11 +9,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./my-lists.component.css']
 })
 export class MyListsComponent implements OnInit {
-  private routeSub;
-  private movieLists: MovieListResponse;
-  private itemsPerPage: number;
-  private currentPage: number;
-  private maxPage: number;
+  public routeSub;
+  public movieLists: MovieListResponse;
+  public itemsPerPage: number;
+  public currentPage: number;
+  public maxPage: number;
 
   constructor(private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,

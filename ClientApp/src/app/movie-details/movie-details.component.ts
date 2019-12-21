@@ -11,13 +11,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./movie-details.component.css']
 })
 export class MovieDetailsComponent implements OnInit {
-  private routeSub;
-  private imdbID: string;
-  private omdbMovie: OMDBMovie;
-  private tmdbMovieFind: TMDBMovieFind;
-  private tmdbMovie: TMDBMovie;
-  private found: boolean;
-  private receivedChildId: string;
+  public routeSub;
+  public imdbID: string;
+  public omdbMovie: OMDBMovie;
+  public tmdbMovieFind: TMDBMovieFind;
+  public tmdbMovie: TMDBMovie;
+  public found: boolean;
+  public receivedChildId: string;
   public isAuthenticated: Observable<boolean>;
   public rottenTomatoRating: string;
   public rating: string;
