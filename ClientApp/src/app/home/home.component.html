@@ -3,8 +3,8 @@
 <div *ngIf="tmdbResponse">
   <div class="container m-t-md">
     <h1 class="mg-bottom text-center">Welcome to The Movie Project</h1>
-    <p class="mg-bottom text-center">Create Lists of movies that you want to watch! Using our search and discover
-      features, you can add movies to your saved lists</p>
+    <p class="mg-bottom text-center">Create lists of movies that you want to watch! Using our search and discover
+      features, you can add movies to your saved lists.</p>
     <div class="row mg-bottom" *ngFor="let row of newArray">
       <ng-container *ngFor="let movieListing of row?.items">
         <div class="card mb-4 box-shadow full-height mx-auto">
