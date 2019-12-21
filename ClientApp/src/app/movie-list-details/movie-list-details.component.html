@@ -12,7 +12,7 @@
   <div class="form-inline">
     <h2 class="mt-auto mr-4 mb-3" id="tableLabel">Movies in this movie list:</h2>
     <div class="fa mt-3">
-      <button [routerLink]="['/search']" type="button" class="btn btn-primary btn-sm">
+      <button [routerLink]="['/']" type="button" class="btn btn-primary btn-sm">
         <i class="fas fa-plus"></i>
       </button>
     </div>
@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="card-footer">
-              <h6 class="movie-title my-1 font-weight-heavy" [routerLink]="['/movie', movieListing.imdbID]">
+              <h6 class="movie-title my-1 font-weight-heavy text-dark" [routerLink]="['/movie', movieListing.imdbID]">
                 {{movieListing?.name}}</h6>
               <hr>
               <div class="row">
@@ -39,7 +39,7 @@
                   <input type="checkbox" class="form-check-input" id="watched-{{ movieListing.imdbID }}"
                     [checked]="movieListing.watched"
                     (change)="toggleMovieWatched(movieListing.imdbID, movieListing.watched)">
-                  <label class="form-check-label" for="watched-{{ movieListing.imdbID }}">Watched</label>
+                  <label class="form-check-label text-dark" for="watched-{{ movieListing.imdbID }}">Watched</label>
                 </div>
                 <button class="btn btn-sm btn-outline-primary mt-auto mr-auto"
                   (click)="deleteMovieFromList(movieListing.imdbID)">Delete</ button>

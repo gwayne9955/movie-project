@@ -1,4 +1,11 @@
-<h1 id="tableLabel">Your Movie Lists:</h1>
+<div class="form-inline">
+  <h1 class="mt-auto mr-4 mb-3" id="tableLabel">Your Movie Lists:</h1>
+  <div class="fa mt-auto mb-4">
+    <button [routerLink]="['/add-movie-list']" type="button" class="btn btn-primary btn-sm">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+</div>
 
 <p *ngIf="!movieLists"><em>Loading...</em></p>
 
@@ -6,14 +13,14 @@
   <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="movieLists">
     <thead>
       <tr>
-        <th>Name</th>
-        <th># of Movies</th>
+        <th class="text-light">Name</th>
+        <th class="text-light"># of Movies</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let movieList of movieLists.items">
-        <td><a [routerLink]="movieList.movieListId">{{ movieList.name }}</a></td>
-        <td>{{ movieList.movies.length }}</td>
+        <td class="text-light"><a [routerLink]="movieList.movieListId">{{ movieList.name }}</a></td>
+        <td class="text-light">{{ movieList.movies.length }}</td>
       </tr>
     </tbody>
   </table>

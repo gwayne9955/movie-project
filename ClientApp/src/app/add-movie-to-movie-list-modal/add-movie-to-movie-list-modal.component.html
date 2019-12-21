@@ -1,6 +1,6 @@
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Which movie list?</h4>
+    <h4 class="modal-title text-dark" id="modal-basic-title">Which movie list?</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -27,6 +27,9 @@
       </div>
     </form>
   </div>
+  <div class="modal-footer">
+       <button type="button" class="btn btn-outline-dark" [routerLink]="['/add-movie-list']">Add New List</button>
+     </div>
 </ng-template>
 
 <button class="btn btn-sm btn-outline-primary" (click)="open(content)">Add Movie To Movie List</button>

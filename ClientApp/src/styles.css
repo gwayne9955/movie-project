@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+
+* {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
 a {
   color: #0366d6;
 }
@@ -48,5 +53,10 @@ code {
 
 li.nav-item.link-active > a {
   color: white !important;
-  
 }
+
+body {
+  color: white;
+  background-color: #343a40;
+}
+
