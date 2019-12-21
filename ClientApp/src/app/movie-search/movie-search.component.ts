@@ -59,7 +59,7 @@ export class MovieSearchComponent implements OnInit {
           for (let i = 0; i < this.tmdbMovies.length; i += this.columns) {
             this.newArray.push({ items: this.tmdbMovies.slice(i, i + this.columns) });
           }
-        }, error => console.error(error));
+        }, error => alert(error.error));
     }
     else {
       this.tmdbResponse = null;
@@ -84,7 +84,7 @@ export class MovieSearchComponent implements OnInit {
         else {
           this.searchMovieSecondaryTitle(originalTitle);
         }
-      }, error => console.error(error));
+      }, error => alert(error.error));
   }
 
   searchMovieSecondaryTitle(originalTitle: string) {
@@ -97,7 +97,7 @@ export class MovieSearchComponent implements OnInit {
       .subscribe(result => {
         this.omdbListing = result;
         this.router.navigateByUrl(`/movie/${this.omdbListing.imdbID}`);
-      }, error => console.error(error));
+      }, error => alert(error.error));
   }
 
   @HostListener("window:scroll", ["$event"])

@@ -48,7 +48,7 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
         for (let i = 0; i < this.movieList.movies.length; i += this.columns) {
           this.newArray.push({ items: this.movieList.movies.slice(i, i + this.columns) });
         }
-      }, error => console.error(error));
+      }, error => alert(error.error));
   }
 
   editListName() {
@@ -57,7 +57,7 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
     })
       .subscribe(result => {
         this.movieList = result;
-      }, error => console.error(error));
+      }, error => alert(error.error));
   }
 
   deleteMovieList() {
@@ -66,7 +66,7 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
         .subscribe(result => {
           alert("MovieList '" + result.name + "' deleted");
           this.router.navigateByUrl('/my-lists');
-        }, error => console.error(error));
+        }, error => alert(error.error));
     }
   }
 
@@ -75,7 +75,7 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         this.getMovieList();
         alert("Movie '" + result.name + "' deleted");
-      }, error => console.error(error));
+      }, error => alert(error.error));
   }
 
   getListName(listName: string) {
@@ -95,7 +95,7 @@ export class MovieListDetailsComponent implements OnInit, OnDestroy {
     })
       .subscribe(result => {
         this.getMovieList();
-      }, error => console.error(error));
+      }, error => alert(error.error));
   }
 
 }

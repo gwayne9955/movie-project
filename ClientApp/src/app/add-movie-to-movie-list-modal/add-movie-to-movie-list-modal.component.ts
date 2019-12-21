@@ -46,7 +46,7 @@ export class AddMovieToMovieListModalComponent implements OnInit {
       }
     }).subscribe(result => {
       this.movieLists = result;
-    }, error => console.error(error));
+    }, error => alert(error.error));
   }
 
   selectMovieListToAddTo(id: string) {

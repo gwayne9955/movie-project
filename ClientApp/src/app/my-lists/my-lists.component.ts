@@ -40,7 +40,7 @@ export class MyListsComponent implements OnInit {
     }).subscribe(result => {
       this.movieLists = result;
       this.maxPage = this.getMaxPage(this.movieLists.totalItems, this.itemsPerPage);
-    }, error => console.error(error));
+    }, error => alert(error.error));
   }
 
   getMaxPage(totalItems: number, itemsPerPage: number) {

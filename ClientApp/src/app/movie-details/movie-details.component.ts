@@ -62,7 +62,6 @@ export class MovieDetailsComponent implements OnInit {
       }
     })
       .subscribe(result => {
-        // debugger;
         this.omdbMovie = result;
         if (this.omdbMovie.Ratings.length > 0) {
           if (this.omdbMovie.Ratings.length > 1 && this.omdbMovie.Ratings[1].Source == "Rotten Tomatoes") {
@@ -74,7 +73,7 @@ export class MovieDetailsComponent implements OnInit {
           }
         }
 
-      }, error => console.error(error));
+      }, error => alert(error.error));
   }
 
   getTMDBListing() {
@@ -87,7 +86,7 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe(result => {
         this.tmdbMovieFind = result;
         this.tmdbMovie = this.tmdbMovieFind.movie_results[0] || null;
-      }, error => console.error(error));
+      }, error => alert(error.error));
   }
 
   addMovieToMovieList(id: string) {
@@ -99,7 +98,7 @@ export class MovieDetailsComponent implements OnInit {
     })
       .subscribe(result => {
         alert("added " + this.omdbMovie.Title);
-      }, error => console.error(error));
+      }, error => alert(error.error));
   }
 
   getRottenTomatoRating(value: string) {

@@ -25,7 +25,7 @@ export class AddMovieListComponent {
         alert("added " + this.listName);
         this.listName = "";
         this.router.navigateByUrl('/my-lists');
-      }, error => console.error(error));
+      }, error => alert(error.error));
   }
 
   toggleAbleToAdd() {

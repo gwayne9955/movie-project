@@ -16,9 +16,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let movieList of movieLists.items" class="movie-list-name">
+            <tr *ngFor="let movieList of movieLists.items" class="movie-list-name" (click)="selectMovieListToAddTo(movieList.movieListId); modal.dismiss('Cross click')">
               <td>
-                <p (click)="selectMovieListToAddTo(movieList.movieListId)">{{ movieList.name }}</p>
+                <p>{{ movieList.name }}</p>
               </td>
               <td>{{ movieList.movies.length }}</td>
             </tr>
