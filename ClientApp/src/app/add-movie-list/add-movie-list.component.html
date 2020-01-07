@@ -1,7 +1,7 @@
 <h1 id="tableLabel">Add a Movie List</h1>
 
 <div class="input-group mb-3">
-  <input (keyup)="toggleAbleToAdd()" [(ngModel)]="listName" type="text" class="form-control" placeholder="My Favs!"
+  <input (keyup.enter)="addListName()" (keyup)="toggleAbleToAdd()" [(ngModel)]="listName" type="text" class="form-control" placeholder="My Favs!"
     aria-describedby="basic-addon2">
   <div class="input-group-append">
     <button class="btn btn-outline-primary" type="button" (click)="addListName()">Add</button>

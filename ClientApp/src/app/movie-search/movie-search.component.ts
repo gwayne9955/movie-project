@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class MovieSearchComponent implements OnInit {
   public routeSub;
   public searchQueryString: string;
+  public queryParam: string;
   public tmdbResponse: TMDBResponse;
   public tmdbMovies;
   public omdbListing: OMDBMovieSearchTitle;
@@ -30,6 +31,7 @@ export class MovieSearchComponent implements OnInit {
       .queryParams
       .subscribe(params => {
         this.searchQueryString = params['q'] || "";
+        this.queryParam = params['q'] || "";
         this.tmdbMovies = [];
         this.pageNum = 1;
         this.searchQuery();

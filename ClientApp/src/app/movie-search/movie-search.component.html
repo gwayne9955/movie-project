@@ -1,6 +1,6 @@
 <h1 id="tableLabel">Find a movie</h1>
 <div class="input-group mb-3">
-   <input id="searchInputField" autofocus [(ngModel)]="searchQueryString" (keyup)="searchQueryOnKeyUp()" type="text"
+   <input id="searchInputField" autofocus [(ngModel)]="searchQueryString" (keyup.enter)="searchButtonOnClick()" (keyup)="searchQueryOnKeyUp()" type="text"
       class="form-control" placeholder="Captain Marvel..." aria-describedby="basic-addon2">
    <div class="input-group-append">
       <button class="btn btn-outline-primary" type="button" (click)="searchButtonOnClick()">Search</button>
@@ -9,7 +9,7 @@
 <p *ngIf="!tmdbResponse"><em>Search Results Here...</em></p>
 <div *ngIf="tmdbResponse">
    <div class="container m-t-md">
-      <h5 id="tableLabel">Search Results for '{{ searchQueryString }}'</h5>
+      <h5 id="tableLabel">Search Results for '{{ queryParam }}'</h5>
       <div class="row mg-bottom" *ngFor="let row of newArray">
          <ng-container *ngFor="let movieListing of row?.items">
             <div class="card mb-4 box-shadow full-height mx-auto"
