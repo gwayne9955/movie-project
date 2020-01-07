@@ -64,15 +64,20 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe(result => {
         this.omdbMovie = result;
         if (this.omdbMovie.Ratings.length > 0) {
-          if (this.omdbMovie.Ratings.length > 1 && this.omdbMovie.Ratings[1].Source == "Rotten Tomatoes") {
-            this.getRottenTomatoRating(this.omdbMovie.Ratings[1].Value);
-            this.rating = this.omdbMovie.Ratings[1].Value;
+          var rottenFound = false;
+
+          for (var i = 0; i < this.omdbMovie.Ratings.length; i++) {
+            if (this.omdbMovie.Ratings[i].Source == "Rotten Tomatoes") {
+              this.getRottenTomatoRating(this.omdbMovie.Ratings[i].Value);
+              this.rating = this.omdbMovie.Ratings[i].Value;
+              rottenFound = true;
+            }
           }
-          else {
+
+          if (!rottenFound) {
             this.rating = this.omdbMovie.Ratings[0].Value;
           }
         }
-
       }, error => console.log(error));
   }
 

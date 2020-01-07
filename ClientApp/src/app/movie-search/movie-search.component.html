@@ -2,6 +2,9 @@
 <div class="input-group mb-3">
    <input id="searchInputField" autofocus [(ngModel)]="searchQueryString" (keyup)="searchQueryOnKeyUp()" type="text"
       class="form-control" placeholder="Captain Marvel..." aria-describedby="basic-addon2">
+   <div class="input-group-append">
+      <button class="btn btn-outline-primary" type="button" (click)="searchButtonOnClick()">Search</button>
+   </div>
 </div>
 <p *ngIf="!tmdbResponse"><em>Search Results Here...</em></p>
 <div *ngIf="tmdbResponse">

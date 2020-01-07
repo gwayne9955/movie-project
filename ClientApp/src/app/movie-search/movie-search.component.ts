@@ -36,12 +36,18 @@ export class MovieSearchComponent implements OnInit {
       });
   }
 
-  searchQueryOnKeyUp() {
+  searchButtonOnClick() {
     this.router.navigate(['search'], { queryParams: { q: this.searchQueryString } });
   }
 
-  searchQuery() {
+  searchQueryOnKeyUp() {
     if (this.searchQueryString && this.searchQueryString.length >= 3) {
+      this.router.navigate(['search'], { queryParams: { q: this.searchQueryString } });
+    }
+  }
+
+  searchQuery() {
+    if (this.searchQueryString) {
       this.http.get<TMDBResponse>("https://api.themoviedb.org/3/search/movie", {
         params: {
           api_key: "f28df3fec9ce98f371cc2a6636044a45",
